@@ -1,6 +1,6 @@
 <?php
 
-	function container($content, $title = "My page")
+	function container_begin($title = "My page")
 	{
 ?>
 <html>
@@ -9,7 +9,17 @@
 	</head>
 
 	<body>
-		<?php echo $content; ?>
+<?php 
+	}
+?>
+
+
+<?php
+	function container_end()
+	{ 
+?>
+
+		<h1>This should occur after all the other text content</h1>
 	</body>
 </html>
 <?php
