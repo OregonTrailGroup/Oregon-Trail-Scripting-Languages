@@ -125,7 +125,8 @@
 			$_supplies->eat($_rate * $_livingMembers);
 		}
 
-		function kill()
+		#checks if any members can be killed (has 0 health)
+		function killCheck()
 		{
 			foreach($_members as $body)
 			{
@@ -199,7 +200,7 @@
 	/**
 	*shops that can be seen at landmarks
 	*/
-	class shop
+	class Shop
 	{
 		#costs for various objects
 		$_clothes; 
