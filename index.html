@@ -1,22 +1,8 @@
-<html>
+import commonUI.php
 
-	<head>
-		<script type="text/javascript" src="proj2.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-		<link href="proj2.css" rel="stylesheet" type="text/css"/>
-		<title>The Oregon Trail Game</title>
-	</head>
-
-	<body>
-		Welcome to our page. This will serve as the hosting site for our Oregon Trail project for CMSC 433.<br>
-		<a href="https://archive.org/details/msdos_Oregon_Trail_The_1990">Click here to play from an external site</a>
-		<br>
-		<br>
-		<div id="div-wrapper">
-			<div id="div-game">
 				<p>
 					You may:
-					<div id="div-entryOptions">
+					<div id="div_options">
 						1. Travel the trail<br>
 						2. Learn about the trail<br>
 						3. See the Oregon Top Ten<br>
@@ -24,10 +10,9 @@
 						5. Choose Management Options<br>
 						6. End<br>
 					</div>
-					What is your choice? <input type="text" name="option"><br>
+					<form action="">
+						What is your choice? <input type="number" min="1" max="6" name="input_option" onkeypress="isEnter()"><br>
+  						<input type="submit" value="">
+					</form>
 				</p>
-			</div>
-		</div>
-	</body>
-
-</html>
+			
