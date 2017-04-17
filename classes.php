@@ -4,15 +4,15 @@
 	*/
 	class PartyMember
 	{
-		private $_alive = true; #alive or dead
-		private $_name;         #party member's first name
-		private $_health = 100; #health, maximum 100, death at 0, 
+		public $_alive = true; #alive or dead
+		public $_name;         #party member's first name
+		public $_health = 100; #health, maximum 100, death at 0, 
 								#illness cured 90 up,
 								#illness possible at 75 bellow
 
-		private $_illness = false; #is ill/ is not ill
-		private $_illnessName = null; #name of illness
-		private $_damage = 0; #damage done by illness
+		public $_illness = false; #is ill/ is not ill
+		public $_illnessName = null; #name of illness
+		public $_damage = 0; #damage done by illness
 
 		#constructor
 		public function __construct($name)
@@ -63,10 +63,10 @@
 		public $_food;
 		public $_money;
 		public $_traps;
-		public $_cloaths;
+		public $clothes;
 		public $_wagonWheels;
-		public $_wagonAxel;
-		public $_wagonTougne;
+		public $_wagonAxle;
+		public $_wagonTongue;
 		public $_oxen;
 		
 		public function __construct($jobCash)
@@ -74,9 +74,10 @@
 			$_food = 0;
 			$_money = $jobCash; #Job
 			$_traps = 0;
-			$_cloaths = 0;
+			$_clothes = 0;
+			$_wagonAxle = 0;
 			$_wagonWheels = 0;
-			$_wagonSpokes = 0;
+			$_wagonTongue = 0;
 
 		}
 
@@ -196,35 +197,31 @@
 	}
 
 	/**
-	shops that can be seen at landmarks
+	*shops that can be seen at landmarks
 	*/
 	class shop
 	{
 		#costs for various objects
-		$_cloaths; 
+		$_clothes; 
 		$_food;
 		$_traps;
-		$_axel;		
-		$_tougne;
-		$_wheel;
+		$_parts;
 		$_yoke;
 
 		function __construct($local)
 		{
 		#costs are set based on a base cost and increase 
 		#with each new location at a set rate
-		$_cloaths = 10 + 2.5 * $local;
+		$_clothes = 10 + 2.5 * $local;
 		$_food  = .2 + .1 * $local;
 		$_traps  =  2 + 2.5 * $local;
-		$_axel  = 10 + 2.5 * $local;
-		$_tougne  = 10 + 2.5 * $local;
-		$_wheel  = 10 + 2.5 * $local;
+		$_parts  = 10 + 2.5 * $local;
 		$_yoke  = 40 + 5 * $local;
 		}
 	}
 
 	/**
-	Landmarks are stops allong the trail
+	*Landmarks are stops allong the trail
 	*/
 	class Landmark
 	{
@@ -242,7 +239,7 @@
 	}
 
 	/**
-	Type of Landmark, adds depth and hasFerry
+	*Type of Landmark, adds depth and hasFerry
 	*/
 	class River extends Landmark
 	{
