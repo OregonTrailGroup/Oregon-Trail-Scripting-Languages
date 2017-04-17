@@ -63,7 +63,7 @@
 		public $_food;
 		public $_money;
 		public $_traps;
-		public $clothes;
+		public $_clothes;
 		public $_wagonWheels;
 		public $_wagonAxle;
 		public $_wagonTongue;
@@ -119,7 +119,7 @@
 			$_rate = $newRate;
 		}
 
-		#foog is reduced based on living party members and ration rate
+		#food is reduced based on living party members and ration rate
 		function eat()
 		{
 			$_supplies->eat($_rate * $_livingMembers);
@@ -149,16 +149,16 @@
 			$sum = 0;
 			$average = 0;
 			foreach ($_members as $body) {
-
 				if($body->$_alive)
 				{
 					$_sum += $body;
 				}
 			}
+
 			$average = $sum / $_livingMembers;
 
 
-			if($average == 0)
+			if($average => 0)
 			{
 				$_health = "Game Over";
 			}
@@ -166,15 +166,15 @@
 			{
 				$_health = "Good";
 			}
-			else if(($average <= 75)&&($average > 50))
+			else if($average > 50)
 			{
 				$_health = "Fair";
 			}
-			else if(($average <= 50)&&($average > 25))
+			else if($average > 25)
 			{
 				$_health = "Poor";
 			}
-			else if($average >= 25)
+			else 
 			{
 				$_health = "Bad";
 			}
