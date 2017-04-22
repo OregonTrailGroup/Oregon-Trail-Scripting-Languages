@@ -256,6 +256,94 @@
 			$_hasFerry = $hasFerry;
 		}
 
+		#states: return 0 for no chance of bad event
+		#1 -  chance of minor event
+		#2 - chance of major bad event
+		#chance based on river depth
+		function ford()
+		{
+			if($_depth =< 2.5)
+			{
+				return 0;
+			}
+			elseif ($_depth < 3.0) {
+				return 1;
+			}
+			else{return 2;}
+		}
+
 	}
+
+	/**
+	* contains values related to traveling
+	*/
+	class Journey
+	{
+		$_maxDate = array('January' => 31,
+						  'Febuary' => 28,
+						  'March' => 31,
+						  'April' => 30,
+						  'May' => 31,
+						  'June' => 30,
+						  'July' => 31,
+						  'August' => 31,
+						  'September' => 30,
+						  'October' => 31,
+						  'November' => 30,
+						  'December' => 31);
+		$_months = array('January','Febuary','March','April',
+						  'May','June','July','August',
+						  'September','October','November','December');
+
+		$_date; #current date, constantlly increments 
+		$_month;
+		$_distance; #distance traveled
+		$_weather; #current weather, effects events
+		$_locations; #array of all landmarks
+		function __construct($date, $month, $location)
+		{
+			$_date = $date;
+			$_month = $_month;
+
+			$_distance = 0;
+			$_weather = "sunny";
+			$_locations =  $location;
+
+			# code...
+		}
+
+		function nextLandmark()
+		{
+			#searches the array for the next highest location based on
+			#current location
+			foreach ($_locations as $local) {
+				if($_distance < $_locations->$_distance)
+					{
+						return $local;
+					}			
+				}
+		}
+
+		#increments the day
+		function incrementDay()
+		{
+			#increase day
+			$_date += 1;
+			#checks if Day is higher then max days for the month
+			if($_date > $_maxDate[$_month])
+			{
+				#resset date to 1, move to next month
+				$_date = 1;
+				$monthI = array_search($_month, $_months) + 1;
+
+				#loop month back to 0
+				if($monthI > 11){$monthI = 0;}
+
+				$_month = $_months[$monthI];
+			}
+		}
+	}
+
+
 
 ?>
