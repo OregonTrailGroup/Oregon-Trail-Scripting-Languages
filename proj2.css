@@ -1,3 +1,6 @@
+
+/* START OF MAIN PAGE */
+
 #div_wrapper {
 	display: flex;
 	flex-direction: column;
@@ -19,9 +22,14 @@
 	padding-left: 50px;
 }
 
-input[type="number"] {
-	background-color: inherit;
-	color: inherit;
-	font-family: inherit;
-	width: 100px;
+.btngrp_main, .btngrp_options {
+	background-color: black;
+	color: white;
+	font-family: 'Press Start 2P', cursive;
 }
+
+.btngrp_main:hover, .btngrp_options:hover {
+	cursor: pointer;
+}
+
+/* END OF MAIN PAGE */
