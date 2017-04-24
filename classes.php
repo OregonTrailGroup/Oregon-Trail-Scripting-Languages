@@ -62,18 +62,19 @@
 		# amount of each supply
 		public $_food;
 		public $_money;
-		public $_traps;
+		public $_bait;
 		public $_clothes;
 		public $_wagonWheels;
 		public $_wagonAxle;
 		public $_wagonTongue;
 		public $_oxen;
-		
+	
+
 		public function __construct($jobCash)
 		{
 			$_food = 0;
 			$_money = $jobCash; #Job
-			$_traps = 0;
+			$_bait = 0;
 			$_clothes = 0;
 			$_wagonAxle = 0;
 			$_wagonWheels = 0;
@@ -86,6 +87,43 @@
 			$_food -= $rate;
 		}
 
+		public function setItem($ID, $amount)
+		{
+			switch ($ID):
+			case 0:
+				$_food += $amount;
+				break;
+				
+			case 1:
+				$_money += $amount;
+				break;
+
+			case 2:
+				$_bait += $amount;
+				break;
+
+			case 3:
+				$_clothes += $amount;
+				break;
+
+			case 4:
+				$_wagonWheels += $amount;
+				break;
+
+			case 5:
+				$_wagonAxle += $amount;
+				break;
+
+			case 6:
+				$_wagonTongue += $amount;
+				break;
+
+			case 7:
+				$_oxen += $amount;
+				break;
+
+
+		}
 
 	}
 
@@ -194,7 +232,6 @@
 			}	
 		}
 
-
 	}
 
 	/**
@@ -205,7 +242,7 @@
 		#costs for various objects
 		$_clothes; 
 		$_food;
-		$_traps;
+		$_bait;
 		$_parts;
 		$_yoke;
 
@@ -215,7 +252,7 @@
 		#with each new location at a set rate
 		$_clothes = 10 + 2.5 * $local;
 		$_food  = .2 + .1 * $local;
-		$_traps  =  2 + 2.5 * $local;
+		$_bait  =  2 + 2.5 * $local;
 		$_parts  = 10 + 2.5 * $local;
 		$_yoke  = 40 + 5 * $local;
 		}
@@ -343,7 +380,5 @@
 			}
 		}
 	}
-
-
 
 ?>
