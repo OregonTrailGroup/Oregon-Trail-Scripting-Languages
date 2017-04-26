@@ -170,7 +170,7 @@
 			{
 				if($body->$_alive)
 				{
-					if($body->$health == 0)
+					if($body->$health <= 0)
 					{
 						$body->$_alive = false;
 						$_livingMembers-=1;
@@ -197,7 +197,7 @@
 			$average = $sum / $_livingMembers;
 
 
-			if($average => 0)
+			if($average <= 0)
 			{
 				$_health = "Game Over";
 			}
