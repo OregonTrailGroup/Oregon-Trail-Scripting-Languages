@@ -1,24 +1,33 @@
 
-/* START OF MAIN PAGE */
-
+/* START OF COMMONUI.PHP */
 #div_wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	text-align: center;
 }
 
 #div_game {
 	background-color: black;
 	color: white;
-	text-align: left;
+	text-align: center;
+	align-items: center;
 	font-family: 'Press Start 2P', cursive;
 	width: 1024px;
 	height: 768px;
 }
 
+/* END OF COMMONUI.PHP */
+/* START OF INDEX.PHP */
+
 #div_options {
+	margin: auto;
 	color: white;
 	text-align: left;
+	width: 512px;
+}
+
+#ul_options {
 	padding-left: 50px;
 }
 

@@ -57,3 +57,18 @@ function isEnter(event) {
 		return true;
 	}
 }
+
+function loadFile(path, selector) {
+	//snippet inspired by http://stackoverflow.com/questions/6470567/jquery-load-txt-file-and-insert-into-div
+	$(document).ready(function() {
+		$.ajax({
+            url : path,
+            dataType: "text",
+            success : function (data) {
+                $(selector).html(data);
+            } else {
+            	alert("File failed to load.");
+            }
+        });
+	});
+}
