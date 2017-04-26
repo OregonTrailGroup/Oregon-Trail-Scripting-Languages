@@ -37,7 +37,7 @@ function display()
 
 function makeTrade()
 {
-	getItem($item, -$itemAmount);
+	$Session["party"]->getItem($item, -$itemAmount);
 	getItem($reward, $rewardAmount);
 }
 	

@@ -271,7 +271,7 @@
 		{
 			$_hasShop = $hasShop;
 			$_name = $name;
-			$_distance $distance;
+			$_distance = $distance;
 
 		}
 	}
@@ -337,7 +337,7 @@
 		$_distance; #distance traveled
 		$_weather; #current weather, effects events
 		$_locations; #array of all landmarks
-		function __construct($date, $month, $location)
+		function __construct($date, $month, $locations)
 		{
 			$_date = $date;
 			$_month = $_month;
@@ -354,7 +354,7 @@
 			#searches the array for the next highest location based on
 			#current location
 			foreach ($_locations as $local) {
-				if($_distance < $_locations->$_distance)
+				if($_distance < $local->$_distance)
 					{
 						return $local;
 					}			
