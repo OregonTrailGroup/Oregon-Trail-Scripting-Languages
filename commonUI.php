@@ -4,6 +4,7 @@
 		<html>
 
 			<head>
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 				<script type="text/javascript" src="proj2.js"></script>
 				<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 				<link href="proj2.css" rel="stylesheet" type="text/css"/>
