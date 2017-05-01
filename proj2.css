@@ -1,0 +1,27 @@
+#div_wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#div_game {
+	background-color: black;
+	color: white;
+	text-align: left;
+	font-family: 'Press Start 2P', cursive;
+	width: 1024px;
+	height: 768px;
+}
+
+#div_options {
+	color: white;
+	text-align: left;
+	padding-left: 50px;
+}
+
+input[type="number"] {
+	background-color: inherit;
+	color: inherit;
+	font-family: inherit;
+	width: 100px;
+}
