@@ -25,7 +25,7 @@
 		{
 			$_illness = true;
 			$_illnessName = $name;
-			$_damage = $damage
+			$_damage = $damage;
 		}
 
 		#heals occur at rests
@@ -89,7 +89,8 @@
 
 		public function setItem($ID, $amount)
 		{
-			switch ($ID):
+			switch ($ID)
+			{ 
 			case 0:
 				$_food += $amount;
 				break;
@@ -121,6 +122,7 @@
 			case 7:
 				$_oxen += $amount;
 				break;
+			}
 
 
 		}
@@ -130,13 +132,13 @@
 	#class for the whole party
 	class Party
 	{
-		$_members = []; #array containing all party members
-		$_health = "Good";	#general health of the party
-		$_supplies;	#supplies class instant
-		$_livingMembers = 5; #licing members of the party
-		$_rate = 3; #rate at which food is eaten
+		public $_members = []; #array containing all party members
+		public $_health = "Good";	#general health of the party
+		public $_supplies;	#supplies class instant
+		public $_livingMembers = 5; #licing members of the party
+		public $_rate = 3; #rate at which food is eaten
 
-		function __construct($names, $jobCash)
+		public function __construct($names, $jobCash)
 		{
 			# names are given to constructor and made into party members
 			$_members[0] = new PartyMember($names[0]);
@@ -152,19 +154,19 @@
 		}
 
 		#set ration rate
-		function setRate($newRate)
+		public function setRate($newRate)
 		{
 			$_rate = $newRate;
 		}
 
 		#food is reduced based on living party members and ration rate
-		function eat()
+		public function eat()
 		{
 			$_supplies->eat($_rate * $_livingMembers);
 		}
 
 		#checks if any members can be killed (has 0 health)
-		function killCheck()
+		public function killCheck()
 		{
 			foreach($_members as $body)
 			{
@@ -183,7 +185,7 @@
 		}
 
 		#averages health and assigns a rating
-		function health()
+		public function health()
 		{
 			$sum = 0;
 			$average = 0;
@@ -221,7 +223,7 @@
 		}
 
 		#rest function that calls each member's heal function
-		function rest($healRate)
+		public function rest($healRate)
 		{
 			foreach ($_members as $body) 
 			{
@@ -240,13 +242,13 @@
 	class Shop
 	{
 		#costs for various objects
-		$_clothes; 
-		$_food;
-		$_bait;
-		$_parts;
-		$_yoke;
+		public $_clothes; 
+		public $_food;
+		public $_bait;
+		public $_parts;
+		public $_yoke;
 
-		function __construct($local)
+		public function __construct($local)
 		{
 		#costs are set based on a base cost and increase 
 		#with each new location at a set rate
@@ -263,11 +265,11 @@
 	*/
 	class Landmark
 	{
-		$_hasShop; #has a shop or not
-		$_name; #name of the landmark
-		$_distance;	#distance along the trail
+		public $_hasShop; #has a shop or not
+		public $_name; #name of the landmark
+		public $_distance;	#distance along the trail
 
-		function __construct($hasShop, $name, $distance)
+		public function __construct($hasShop, $name, $distance)
 		{
 			$_hasShop = $hasShop;
 			$_name = $name;
@@ -281,10 +283,10 @@
 	*/
 	class River extends Landmark
 	{
-		$_depth; #depth of the river, invluences fording and rafting
-		$_hasFerry; #wheter a ferry is avalable or not
+		public $_depth; #depth of the river, invluences fording and rafting
+		public $_hasFerry; #wheter a ferry is avalable or not
 
-		function __construct($name, $distance, $depth, $hasFerry)
+		public function __construct($name, $distance, $depth, $hasFerry)
 		{
 			#notice the super ensures there is no shop avalable
 			parent::__construct(false, $name, $distance);
@@ -297,9 +299,9 @@
 		#1 -  chance of minor event
 		#2 - chance of major bad event
 		#chance based on river depth
-		function ford()
+		public function ford()
 		{
-			if($_depth =< 2.5)
+			if ($_depth <= 2.5)
 			{
 				return 0;
 			}
@@ -316,7 +318,7 @@
 	*/
 	class Journey
 	{
-		$_maxDate = array('January' => 31,
+		public $_maxDate = array('January' => 31,
 						  'Febuary' => 28,
 						  'March' => 31,
 						  'April' => 30,
@@ -328,16 +330,16 @@
 						  'October' => 31,
 						  'November' => 30,
 						  'December' => 31);
-		$_months = array('January','Febuary','March','April',
+		public $_months = array('January','Febuary','March','April',
 						  'May','June','July','August',
 						  'September','October','November','December');
 
-		$_date; #current date, constantlly increments 
-		$_month;
-		$_distance; #distance traveled
-		$_weather; #current weather, effects events
-		$_locations; #array of all landmarks
-		function __construct($date, $month, $locations)
+		public $_date; #current date, constantlly increments 
+		public $_month;
+		public $_distance; #distance traveled
+		public $_weather; #current weather, effects events
+		public $_locations; #array of all landmarks
+		public function __construct($date, $month, $locations)
 		{
 			$_date = $date;
 			$_month = $_month;
@@ -349,7 +351,7 @@
 			# code...
 		}
 
-		function nextLandmark()
+		public function nextLandmark()
 		{
 			#searches the array for the next highest location based on
 			#current location
@@ -362,7 +364,7 @@
 		}
 
 		#increments the day
-		function incrementDay()
+		public function incrementDay()
 		{
 			#increase day
 			$_date += 1;
