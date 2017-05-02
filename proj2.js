@@ -18,7 +18,6 @@ $(document).ready(function(){
 			//management options
 			break;
 		default:
-			alert("NONE");
 			break;
 		}
 
@@ -66,9 +65,15 @@ function loadFile(path, selector) {
             dataType: "text",
             success : function (data) {
                 $(selector).html(data);
-            } else {
-            	alert("File failed to load.");
             }
         });
 	});
+}
+
+function toggleDivs(toShow, toHide) {
+	
+	var eleToShow = document.getElementById(toShow);
+	var eleToHide = document.getElementById(toHide);
+	eleToShow.style.display = "block";
+	eleToHide.style.display = "none";
 }

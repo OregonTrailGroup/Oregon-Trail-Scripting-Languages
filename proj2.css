@@ -41,4 +41,21 @@
 	cursor: pointer;
 }
 
-/* END OF MAIN PAGE */
+/* END OF INDEX.PHP */
+/* START OF START.PHP */
+
+#div_hidden {
+	align-items: center;
+	display: none;
+	margin: auto;
+	color: white;
+	text-align: left;
+	width: 512px;
+}
+
+#btn_return {
+	display: block;
+	margin: 0 auto;
+}
+
+/* END OF START.PHP */
