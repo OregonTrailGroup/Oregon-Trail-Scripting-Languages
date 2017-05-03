@@ -265,7 +265,9 @@
 	*/
 	class Landmark
 	{
+		public static $_numShops = 0;
 		public $_hasShop; #has a shop or not
+		public $_shopIndex; # if this has a shop, the index of the shop
 		public $_name; #name of the landmark
 		public $_distance;	#distance along the trail
 
@@ -274,7 +276,16 @@
 			$_hasShop = $hasShop;
 			$_name = $name;
 			$_distance = $distance;
-
+			
+			if ($_hasShop == TRUE)
+			{
+				self::$_numShops++;
+				$this->_shopIndex = self::$_numShops;
+			}
+			else
+			{
+				$this->_shopIndex = -1;
+			}
 		}
 	}
 
@@ -381,6 +392,67 @@
 				$_month = $_months[$monthI];
 			}
 		}
+
+		# Binary searches the locations array for a specified landmark given a distance
+		# Gets returned in the format [index, object] or null if nothing was found
+		public function getLandmark($distance)
+		{
+			$hi = count($this->_locations) - 1;
+			$lo = 0;
+
+			while ($lo != $hi)
+			{
+				$mid = floor(($hi + $lo) / 2);
+
+				if ($this->_locations[$mid]->_distance == $distance)
+				{
+					return array($mid, $this->_locations[$mid]);
+				}
+				else if ($distance < $this->_locations[$mid]->_distance)
+				{
+					$hi = $mid - 1;
+				}
+				else if ($distance > $this->_locations[$mid]->_distance)
+				{
+					$lo = $mid + 1;
+				}
+			}
+
+			// Check a size-1 partition just in case
+			if ($this->_locations[$hi]->_distance == $distance)
+			{
+				return array( $hi, $this->_locations[$hi] );
+			}
+			else
+			{
+				return null;
+			}
+		}
 	}
 
-?>
+# Found on the PHP website
+function erase_session()
+{
+	// Initialize the session.
+	// If you are using session_name("something"), don't forget it now!
+	session_start();
+
+	// Unset all of the session variables.
+	$_SESSION = array();
+
+	// If it's desired to kill the session, also delete the session cookie.
+	// Note: This will destroy the session, and not just the session data!
+	if (ini_get("session.use_cookies")) {
+		$params = session_get_cookie_params();
+		setcookie(session_name(), '', time() - 42000,
+			$params["path"], $params["domain"],
+			$params["secure"], $params["httponly"]
+		);
+	}
+
+	// Finally, destroy the session.
+	session_destroy();
+}
+
+# Since this is a pure PHP file, it's best practice to leave the end tag off
+# to avoid extraneous whitespace issues

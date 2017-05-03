@@ -25,3 +25,12 @@ input[type="number"] {
 	font-family: inherit;
 	width: 100px;
 }
+
+/* Lays elements out horizontally, centers them vertically, then evenly spaces them horizontally */
+div.horizontal-layout
+{
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-around;
+}
