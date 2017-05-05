@@ -12,8 +12,17 @@ $locations = array(
     new Landmark(FALSE, "Landmark 4", 600)
 );
 
+$names = array(
+    "Bo",
+    "Jangles",
+    "Ate",
+    "A",
+    "Sandwich"
+);
+
 $_SESSION["playerJourney"] = new Journey(1, 4, $locations);
 $_SESSION["playerJourney"]->_distance = 500;
+$_SESSION["playerParty"] = new Party($names, 1600);
 
 ?>
 
