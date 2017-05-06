@@ -1,19 +1,20 @@
 <?php
-import "header.php";
-import "classes.php";
-import "commonUI.php";
+
+include "classes.php";
+
+include "commonUI.php";
 
 
-$time = $_GET["$restDays"];
+$time = $_GET["restDays"];
 
 for ($i=0; $i < $time; $i++) { 
-    $_SESSION["journey"]->incrementDay();
+
+    $_SESSION["playerJourney"]->incrementDay();
+
 }
 
-$dateString = $_SESSION["journey"]->$_month . " " . $_SESSION["journey"]->$_date;
+$dateString = $_SESSION["playerJourney"]->_month . " " . $_SESSION["playerJourney"]->_date;
 $associative_array = array('date' => $dateString);
 
-return json_encode($associative_array);
-
-endHTML();
+echo json_encode($associative_array);
 ?>

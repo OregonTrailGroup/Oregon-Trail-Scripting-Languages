@@ -1,7 +1,9 @@
 <?php
-import "header.php";
-import "classes.php";
-import "commonUI.php";
+include "classes.php";
+session_start();
+
+include "commonUI.php";
+startHTML();
 #food 0 
 #money is 1 but here results in no trade
 #bait 2
@@ -16,8 +18,8 @@ import "commonUI.php";
 
 <?php
 
-$_SESSION["party"]->setItem($_GET["$itemID"], -$_GET["$itemQunt"]);
-$_SESSION["party"]->setItem($_GET["$rewardID"]), $_GET["$rewardQunt"]);
+$_SESSION["playParty"]->_supplies->setItem($_GET["$itemID"], -$_GET["$itemQunt"]);
+$_SESSION["playParty"]->_supplies->setItem($_GET["$rewardID"], $_GET["$rewardQunt"]);
 	
 
 endHTML();
