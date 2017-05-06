@@ -26,6 +26,6 @@ $_SESSION["playerParty"] = new Party($names, 1600);
 
 ?>
 
-<meta http-equiv="refresh" content="2; url=shop.php" />
+<meta http-equiv="refresh" content="2; url=shop.php?sourcePage=index.php" />
 
 <p>Redirecting you to the shop in 2 seconds...</p>

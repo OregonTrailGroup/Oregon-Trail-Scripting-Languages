@@ -79,7 +79,7 @@
 			$this->_wagonAxle = 0;
 			$this->_wagonWheels = 0;
 			$this->_wagonTongue = 0;
-
+			$this->_oxen = 0;
 		}
 
 		public function eat($rate)
