@@ -1,7 +1,7 @@
 <?php
 include "scoresAndDeaths.php";
 
-$db = new OregonTrailDatabase("root", "eritte2");
+$db = new OregonTrailDatabase("eritte2", "eritte2");
 $db->connect();
 
 echo "Inserting data into database...<br>";

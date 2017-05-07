@@ -2,7 +2,7 @@
 
 class OregonTrailDatabase 
 {
-    static $host = "127.0.0.1";
+    static $host = "studentdb-maria.gl.umbc.edu";
     private $_username;
     private $_password;
     private $_dbConnection;
