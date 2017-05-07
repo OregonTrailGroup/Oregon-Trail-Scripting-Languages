@@ -4,7 +4,7 @@ include "scoresAndDeaths.php";
 $db = new OregonTrailDatabase("root", "eritte2");
 $db->connect();
 
-echo "Inserting data into database...";
+echo "Inserting data into database...<br>";
 
 $db->addDeath("Evan", 500, "He died of dysentery", 1, 3);
 $db->addScore("Evan", 9001);
@@ -15,12 +15,13 @@ $db->addScore("Andrew", 9004);
 
 $tombstone = $db->getDeath(400, 600);
 
-echo "Tombstone: ".$tombstone["name"]." died on ".$tombstone["date"]." with the message: ".$tombstone["message"];
+echo "Tombstone: ".$tombstone["name"]." died on ".$tombstone["date"]." with the message: ".$tombstone["message"]."<br>";
 
 $scores = $db->getScores();
 $index = 1;
 
 foreach ($scores as $score)
 {
-    echo "#".$index.": ".$score["name"]." -> ".$score["score"];
+    echo "#".$index.": ".$score["name"]." -> ".$score["score"]."<br>";
+    $index++;
 }

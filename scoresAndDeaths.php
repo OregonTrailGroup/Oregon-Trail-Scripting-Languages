@@ -2,7 +2,7 @@
 
 class OregonTrailDatabase 
 {
-    static $host = "localhost";
+    static $host = "127.0.0.1";
     private $_username;
     private $_password;
     private $_dbConnection;
@@ -15,27 +15,18 @@ class OregonTrailDatabase
         $this->_dbConnection = NULL;
     }
 
-    // Closes the DB connection when this is destroyed
-    public function __destruct()
-    {
-        if ($this->_dbConnection)
-        {
-            mysql_close($this->_dbConnection);
-        }
-    }
-
     // Connects to the database. Returns TRUE on success and FALSE on failure.
     public function connect()
     {
-        $this->_dbConnection = mysql_connect(self::$host, $this->_username, $this->_password);
+        $this->_dbConnection = new mysqli(self::$host, $this->_username, $this->_password);
 
-        if ($this->_dbConnection)
+        if ($this->_dbConnection->connect_errno)
         {
-            return TRUE;
+            return FALSE;
         }
         else
         {
-            return FALSE;
+            return TRUE;
         }
     }
 
@@ -54,7 +45,7 @@ class OregonTrailDatabase
         $this->_verifyConnection();
         $queryString = "INSERT INTO eritte2.tombstones (`name`, `distance`, `message`, `date`) VALUES ('".$name."', '".$miles."', '".$message."', DATE '1848-".$month."-".$day."')";
         
-        mysql_query($queryString);
+        $this->_dbConnection->query($queryString);
     }
 
     // Adds a score
@@ -63,7 +54,7 @@ class OregonTrailDatabase
         $this->_verifyConnection();
         $queryString = "INSERT INTO eritte2.scores (`name`, `score`) VALUES ('".$name."', ".$score.")";
 
-        mysql_query($queryString);
+        $this->_dbConnection->query($queryString);
     }
 
     // Gets a tombstone in a distance interval. Returns associative array {"name", "message", "date"} if there is a tombstone at the specified distance or FALSE otherwise
@@ -72,21 +63,21 @@ class OregonTrailDatabase
         $this->_verifyConnection();
         $queryString = "SELECT `name`, `message`, `date` FROM eritte2.tombstones WHERE `distance` >= ".$milesLow." AND `distance` <= ".$milesHigh." LIMIT 1";
 
-        $result = mysql_query($queryString);
+        $result = $this->_dbConnection->query($queryString);
 
-        return mysql_fetch_assoc($result);
+        return $result->fetch_assoc();
     }
 
     // Gets the top 10 scores or less depending on the contents of the database as an array of associative arrays: {"name", "score"}
     public function getScores()
     {
         $this->_verifyConnection();
-        $queryString = "SELECT `name`, `score` FROM eritte2.scores ORDER BY `score` ASC LIMIT 10";
+        $queryString = "SELECT `name`, `score` FROM eritte2.scores ORDER BY `score` DESC LIMIT 10";
 
         $results = array();
-        $result = mysql_query($queryString);
+        $result = $this->_dbConnection->query($queryString);
 
-        while ($row = mysql_fetch_assoc($result))
+        while ($row = $result->fetch_assoc())
         {
             array_push($results, $row);
         }
