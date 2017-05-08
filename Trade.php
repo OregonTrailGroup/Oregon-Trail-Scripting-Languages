@@ -34,7 +34,7 @@ if(($item == 1)||($reward == 1))
 }
 else
 {
-	echo "A travaler wants to trade " . $itemAmount . " " . $itemClaim[$item] . 
+	echo "A traveler wants to trade " . $itemAmount . " " . $itemClaim[$item] . 
 	"(s) for " . $rewardAmount . " " . $itemClaim[$reward] . "(s).";
 ?>
 
