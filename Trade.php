@@ -1,7 +1,7 @@
 <?php
-import "header.php";
-import "classes.php";
-import "commonUI.php";
+include "classes.php";
+session_start();
+include "commonUI.php";
 #food 0 
 #money is 1 but here results in no trade
 #bait 2
@@ -16,6 +16,8 @@ startHTML("Trade");
 <p>
 
 <?php
+$itemClaim = array('0' => 'food', '2' => 'Bait','3' => 'Clothes', '4' => ' Wagon Wheel', 
+	'5' => 'Wagon Axle', '6' => 'Wagon Tongue', '7' => 'Oxen');
 $ranges = [[30,100],[0,0],[30,100],[1,5],[1,3],[1,3],[1,3],[1,5]];
 $item = rand(0, 7);
 $itemAmount = rand($ranges[$item][0],$ranges[$item][1]);
@@ -23,7 +25,8 @@ $itemAmount = rand($ranges[$item][0],$ranges[$item][1]);
 $reward = rand(0, 7);
 $rewardAmount = rand($ranges[$reward][0],$ranges[$reward][1]);
 
-if(($item == 1)||($reward = 1))
+
+if(($item == 1)||($reward == 1))
 {
 
 		echo "No one wants to trade today.";
@@ -31,9 +34,9 @@ if(($item == 1)||($reward = 1))
 }
 else
 {
-	echo "A travaler wants to trade" . $itemAmount . " " . $item . 
-	"(s) for" . $rewardAmount . " " . $reward . "(s).";
-	?>
+	echo "A traveler wants to trade " . $itemAmount . " " . $itemClaim[$item] . 
+	"(s) for " . $rewardAmount . " " . $itemClaim[$reward] . "(s).";
+?>
 
 
 	<form action="Trade2.php">
@@ -46,11 +49,12 @@ else
         <input type = "submit" value="Yes">  
 	</form>
 
-	   <a href = <?php echo $_GET["sourcePage.php"]?>> <button>No</button></a>
+	   <a href = "<?php echo $_GET["sourcePage.php"]?>"> <button>No</button></a>
 
 
 </p>
 
 <?php
+}
 endHTML();
 ?>
