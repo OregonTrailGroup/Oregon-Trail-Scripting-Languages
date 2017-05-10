@@ -7,15 +7,15 @@ startHTML("Select Difficulty");
 	<div id="div_options">
 		Many kinds of people made the trip to Oregon.<br>
 		You may:<br><br>
-		<ul id="ul_options">
-			<form action="party.php" method="post">
-				<input type="submit" value="1." name="difficulty" class="btngrp_main" id="btn_main1"> Be a banker from Boston (Start with $1600, score x1)<br>
-				<input type="submit" value="2." name="difficulty" class="btngrp_main" id="btn_main2"> Be a carpenter from Ohio (Start with $800, score x2)<br>
-				<input type="submit" value="3." name="difficulty" class="btngrp_main" id="btn_main3"> Be a farmer from Illinois (Start with $400, score x3)
-				<button class="btngrp_main" id="btn_main4" onclick="toggleDivs('div_hidden', 'div_options')">4.</button></a> Find out the differences between these choices<br><br>
-			</form>
-		</ul>
-		What is your choice?
+		<form action="party.php" method="post">
+			<ul id="ul_options">
+				<input type="button" class="btngrp_main" id="btn_main4" onclick="toggleDivs('div_hidden', 'div_options')" value="->"> Find out the differences between these choices<br><br>
+				<input type="radio" value="1." name="difficulty" class="btngrp_main" id="btn_main1"> Be a banker from Boston (Start with $1600, score x1)<br>
+				<input type="radio" value="2." name="difficulty" class="btngrp_main" id="btn_main2"> Be a carpenter from Ohio (Start with $800, score x2)<br>
+				<input type="radio" value="3." name="difficulty" class="btngrp_main" id="btn_main3"> Be a farmer from Illinois (Start with $400, score x3)<br>
+			</ul>
+			<input type="submit" value="Continue" class="btngrp_main" id="btn_submit">
+		</form>
 	</div>
 	<div id="div_hidden">
 		<p>
@@ -30,4 +30,3 @@ startHTML("Select Difficulty");
 
 <?php
 endHTML();
-?>

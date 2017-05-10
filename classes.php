@@ -49,7 +49,7 @@
         }
 
         #kills member
-        public function die()
+        public function _die()
         {
             $_alive = false;
         }
