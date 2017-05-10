@@ -1,6 +1,10 @@
 <?php
 include 'commonUI.php';
-startHTML("The Oregon Trail Game")
+
+//let's begin our session
+session_start();
+
+startHTML("The Oregon Trail Game");
 ?>
 	<br><img src="assets/title.png"><br>
 	<br><img src="assets/separator.png"><br><br>
