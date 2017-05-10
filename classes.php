@@ -350,16 +350,29 @@
 		public $_distance; #distance traveled
 		public $_weather; #current weather, effects events
 		public $_locations; #array of all landmarks
-		public function __construct($date, $month, $locations)
+		public function __construct($date, $month)
 		{
 			$this->_date = $date;
 			$this->_month = $month;
 
-			$this->_distance = 0;
-			$this->_weather = "sunny";
-			$this->_locations =  $locations;
-
-			# code...
+			$_distance = 0;
+			$_weather = "sunny";
+			$this->_locations = array( new River("Kansas River Crossing", 102, 2, TRUE),
+					      new River("Big Blue River Crossing", 185, 2.3, FALSE),
+					      new Landmark(TRUE, "Fort Kearney", 304),
+					      new Landmark(FALSE, "Chimney Rock", 554),
+						  new Landmark(TRUE, "Fort Laramie", 640),
+						  new Landmark(FALSE, "Independence Rock", 830),
+						  new Landmark(FALSE, "South Pass", 932),
+						  new River("Green River Crossing", 989, 2.6, TRUE),
+						  new Landmark(FALSE, "Soda Springs", 1133),
+						  new Landmark(TRUE, "Fort Hall", 1190),
+						  new River("Snake River Crossing", 1372, 3.0, FALSE),
+						  new Landmark(TRUE, "Fort Boise", 1486),
+						  new Landmark(FALSE, "Blue Mountains", 1646),
+						  new Landmark(FALSE, "The Dalles", 1771),
+						  new Landmark(TRUE, "Williamette Valley", 1871),
+						  new Landmark(FALSE, "Oregon City", 2000));
 		}
 
 		public function nextLandmark()
