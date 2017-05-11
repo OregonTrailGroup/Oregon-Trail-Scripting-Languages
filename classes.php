@@ -17,41 +17,41 @@
 		#constructor
 		public function __construct($name)
 		{
-			$_name = $name;
+			$this->_name = $name;
 		}
 
 		#induces injury or illness
 		public function catchCold($name, $damage)
 		{
-			$_illness = true;
-			$_illnessName = $name;
-			$_damage = $damage;
+			$this->_illness = true;
+			$this->_illnessName = $name;
+			$this->_damage = $damage;
 		}
 
 		#heals occur at rests
 		public function heal($healRate)
 		{
-			if ($health >= 90)
+			if ($this->health >= 90)
 			{
-				$_illness = false;
-				$_illnessName = null;
+				$this->_illness = false;
+				$this->_illnessName = null;
 			}
-			if ($health < 100)
+			if ($this->health < 100)
 			{
-				$_health += $healRate;
+				$this->_health += $healRate;
 			}
 		}
 
 		#member takes damage when ill or durring event
 		public function takeDamage()
 		{
-			$_health -= $damage; 
+			$this->_health -= $damage; 
 		}
 
 		#kills member
-		public function die()
+		public function killMember()
 		{
-			$_alive = false;
+			$this->_alive = false;
 		}
 	}
 
@@ -72,19 +72,19 @@
 
 		public function __construct($jobCash)
 		{
-			$_food = 0;
-			$_money = $jobCash; #Job
-			$_bait = 0;
-			$_clothes = 0;
-			$_wagonAxle = 0;
-			$_wagonWheels = 0;
-			$_wagonTongue = 0;
+			$this->_food = 0;
+			$this->_money = $jobCash; #Job
+			$this->_bait = 0;
+			$this->_clothes = 0;
+			$this->_wagonAxle = 0;
+			$this->_wagonWheels = 0;
+			$this->_wagonTongue = 0;
 
 		}
 
 		public function eat($rate)
 		{
-			$_food -= $rate;
+			$this->_food -= $rate;
 		}
 
 		public function setItem($ID, $amount)
@@ -92,35 +92,35 @@
 			switch ($ID)
 			{ 
 			case 0:
-				$_food += $amount;
+				$this->_food += $amount;
 				break;
 				
 			case 1:
-				$_money += $amount;
+				$this->_money += $amount;
 				break;
 
 			case 2:
-				$_bait += $amount;
+				$this->_bait += $amount;
 				break;
 
 			case 3:
-				$_clothes += $amount;
+				$this->_clothes += $amount;
 				break;
 
 			case 4:
-				$_wagonWheels += $amount;
+				$this->_wagonWheels += $amount;
 				break;
 
 			case 5:
-				$_wagonAxle += $amount;
+				$this->_wagonAxle += $amount;
 				break;
 
 			case 6:
-				$_wagonTongue += $amount;
+				$this->_wagonTongue += $amount;
 				break;
 
 			case 7:
-				$_oxen += $amount;
+				$this->_oxen += $amount;
 				break;
 			}
 
@@ -137,18 +137,23 @@
 		public $_supplies;	#supplies class instant
 		public $_livingMembers = 5; #licing members of the party
 		public $_rate = 3; #rate at which food is eaten
+		public $_job;
+		public $_jobVal = [["Banker", 1600.00], ["Carpenter", 800.00],["Farmer",400.00]];
 
-		public function __construct($names, $jobCash)
+		public function __construct($names, $job)
 		{
 			# names are given to constructor and made into party members
-			$_members[0] = new PartyMember($names[0]);
-			$_members[1] = new PartyMember($names[1]);
-			$_members[2] = new PartyMember($names[2]);
-			$_members[3] = new PartyMember($names[3]);
-			$_members[4] = new PartyMember($names[4]);
+			$this->_members[0] = new PartyMember($names[0]);
+			$this->_members[1] = new PartyMember($names[1]);
+			$this->_members[2] = new PartyMember($names[2]);
+			$this->_members[3] = new PartyMember($names[3]);
+			$this->_members[4] = new PartyMember($names[4]);
 
 			#supplies made by passing in starting money
-			$_supplies = new Supplies($jobCash);
+			$this->_job = $job;
+
+			$this->_supplies = new Supplies($this->_jobVal[$job][1]);
+
 
 
 		}
@@ -156,26 +161,26 @@
 		#set ration rate
 		public function setRate($newRate)
 		{
-			$_rate = $newRate;
+			$this->_rate = $newRate;
 		}
 
 		#food is reduced based on living party members and ration rate
 		public function eat()
 		{
-			$_supplies->eat($_rate * $_livingMembers);
+			$this->_supplies->eat($_rate * $_livingMembers);
 		}
 
 		#checks if any members can be killed (has 0 health)
 		public function killCheck()
 		{
-			foreach($_members as $body)
+			foreach($this->_members as $body)
 			{
 				if($body->$_alive)
 				{
 					if($body->$health <= 0)
 					{
 						$body->$_alive = false;
-						$_livingMembers-=1;
+						$this->_livingMembers-=1;
 					}
 				}
 			}
@@ -189,10 +194,10 @@
 		{
 			$sum = 0;
 			$average = 0;
-			foreach ($_members as $body) {
+			foreach ($this->_members as $body) {
 				if($body->$_alive)
 				{
-					$_sum += $body;
+					$this->_sum += $body;
 				}
 			}
 
@@ -201,23 +206,23 @@
 
 			if($average <= 0)
 			{
-				$_health = "Game Over";
+				$this->_health = "Game Over";
 			}
 			else if($average >= 75)
 			{
-				$_health = "Good";
+				$this->_health = "Good";
 			}
 			else if($average > 50)
 			{
-				$_health = "Fair";
+				$this->_health = "Fair";
 			}
 			else if($average > 25)
 			{
-				$_health = "Poor";
+				$this->_health = "Poor";
 			}
 			else 
 			{
-				$_health = "Bad";
+				$this->_health = "Bad";
 			}
 
 		}
@@ -225,7 +230,7 @@
 		#rest function that calls each member's heal function
 		public function rest($healRate)
 		{
-			foreach ($_members as $body) 
+			foreach ($this->_members as $body) 
 			{
 				if($body->$_alive)
 				{
@@ -252,11 +257,11 @@
 		{
 		#costs are set based on a base cost and increase 
 		#with each new location at a set rate
-		$_clothes = 10 + 2.5 * $local;
-		$_food  = .2 + .1 * $local;
-		$_bait  =  2 + 2.5 * $local;
-		$_parts  = 10 + 2.5 * $local;
-		$_yoke  = 40 + 5 * $local;
+		$this->_clothes = 10 + 2.5 * $local;
+		$this->_food  = .2 + .1 * $local;
+		$this->_bait  =  2 + 2.5 * $local;
+		$this->_parts  = 10 + 2.5 * $local;
+		$this->_yoke  = 40 + 5 * $local;
 		}
 	}
 
@@ -271,9 +276,9 @@
 
 		public function __construct($hasShop, $name, $distance)
 		{
-			$_hasShop = $hasShop;
-			$_name = $name;
-			$_distance = $distance;
+			$this->_hasShop = $hasShop;
+			$this->_name = $name;
+			$this->_distance = $distance;
 
 		}
 	}
@@ -291,8 +296,8 @@
 			#notice the super ensures there is no shop avalable
 			parent::__construct(false, $name, $distance);
 
-			$_depth = $depth;
-			$_hasFerry = $hasFerry;
+			$this->_depth = $depth;
+			$this->_hasFerry = $hasFerry;
 		}
 
 		#states: return 0 for no chance of bad event
@@ -301,11 +306,11 @@
 		#chance based on river depth
 		public function ford()
 		{
-			if ($_depth <= 2.5)
+			if ($this->_depth <= 2.5)
 			{
 				return 0;
 			}
-			elseif ($_depth < 3.0) {
+			elseif ($this->_depth < 3.0) {
 				return 1;
 			}
 			else{return 2;}
@@ -341,12 +346,12 @@
 		public $_locations; #array of all landmarks
 		public function __construct($date, $month, $locations)
 		{
-			$_date = $date;
-			$_month = $_month;
+			$this->_date = $date;
+			$this->_month = $month;
 
-			$_distance = 0;
-			$_weather = "sunny";
-			$_locations =  $location;
+			$this->_distance = 0;
+			$this->_weather = "sunny";
+			$this->_locations =  $locations;
 
 			# code...
 		}
@@ -355,8 +360,8 @@
 		{
 			#searches the array for the next highest location based on
 			#current location
-			foreach ($_locations as $local) {
-				if($_distance < $local->$_distance)
+			foreach ($this->_locations as $local) {
+				if($this->_distance < $local->$_distance)
 					{
 						return $local;
 					}			
@@ -367,18 +372,18 @@
 		public function incrementDay()
 		{
 			#increase day
-			$_date += 1;
+			$this->_date += 1;
 			#checks if Day is higher then max days for the month
-			if($_date > $_maxDate[$_month])
+			if($this->_date > $this->_maxDate[$this->_month])
 			{
 				#resset date to 1, move to next month
-				$_date = 1;
-				$monthI = array_search($_month, $_months) + 1;
+				$this->_date = 1;
+				$monthI = array_search($this->_month, $this->_months) + 1;
 
 				#loop month back to 0
 				if($monthI > 11){$monthI = 0;}
 
-				$_month = $_months[$monthI];
+				$this->_month = $this->_months[$monthI];
 			}
 		}
 	}
