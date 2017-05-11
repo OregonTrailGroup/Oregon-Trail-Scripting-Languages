@@ -38,20 +38,32 @@ Points for Survinving Members <?php echo $scores[0] ?><br>
 
 <?php
 $scoreSum = 0;
-	foreach ($scores as $val) {
+	foreach ($scores as $val) 
+	{
 		$scoreSum+= $val;
 	}
 $finalscore = $scoreSum + ($scoreSum * $_SESSION["playParty"]->_job);
-
 ?>
+
 Score : <?php echo $scoreSum?><br><br>
 Because you played as a <?php echo  $_SESSION["playParty"]->_jobVal[$_SESSION["playParty"]->_job][0]?> 
 you have<br> earned <?php echo $_SESSION["playParty"]->_job+1 ?> times your score.<br><br>
 
 Final Score : <?php echo $finalscore?>
+<br>
+<br>
 
+<form action="addscore2.php">
+Input a Name:		
+		<input type = "hidden" name="source2" value="<?php echo $_GET["sourcePage"] ?>">
+		<input type = "hidden" name="sourcePage" value="addscore.php">
+		<input type = "hidden" name="score" value="<?php echo $finalscore?>">
+		<input type = "text" name="name" value="<?php echo $_SESSION["playParty"]->_members[0]->_name ?>">
+		<input type = "submit" value="Go">  
+	</form>
 </p>
-<?php
 
+
+<?php
 endHTML();
 ?>
