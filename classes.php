@@ -79,7 +79,7 @@
 			$this->_wagonAxle = 0;
 			$this->_wagonWheels = 0;
 			$this->_wagonTongue = 0;
-
+			$this->_oxen = 0;
 		}
 
 		public function eat($rate)
@@ -235,7 +235,7 @@
 			{
 				if($body->_alive)
 				{
-					$body->heal($healRate);
+					$this->body->heal($healRate);
 				}
 			}	
 		}
@@ -271,7 +271,9 @@
 	*/
 	class Landmark
 	{
+		public static $_numShops = 0;
 		public $_hasShop; #has a shop or not
+		public $_shopIndex; # if this has a shop, the index of the shop
 		public $_name; #name of the landmark
 		public $_distance;	#distance along the trail
 
@@ -280,7 +282,16 @@
 			$this->_hasShop = $hasShop;
 			$this->_name = $name;
 			$this->_distance = $distance;
-
+			
+			if ($this->_hasShop == TRUE)
+			{
+				self::$_numShops++;
+				$this->_shopIndex = self::$_numShops;
+			}
+			else
+			{
+				$this->_shopIndex = -1;
+			}
 		}
 	}
 
@@ -345,16 +356,31 @@
 		public $_distance; #distance traveled
 		public $_weather; #current weather, effects events
 		public $_locations; #array of all landmarks
-		public function __construct($date, $month, $locations)
+		public function __construct($date, $month)
 		{
 			$this->_date = $date;
 			$this->_month = $month;
 
 			$this->_distance = 0;
 			$this->_weather = "sunny";
-			$this->_locations =  $locations;
-
-			# code...
+			$_distance = 0;
+			$_weather = "sunny";
+			$this->_locations = array( new River("Kansas River Crossing", 102, 2, TRUE),
+					      new River("Big Blue River Crossing", 185, 2.3, FALSE),
+					      new Landmark(TRUE, "Fort Kearney", 304),
+					      new Landmark(FALSE, "Chimney Rock", 554),
+						  new Landmark(TRUE, "Fort Laramie", 640),
+						  new Landmark(FALSE, "Independence Rock", 830),
+						  new Landmark(FALSE, "South Pass", 932),
+						  new River("Green River Crossing", 989, 2.6, TRUE),
+						  new Landmark(FALSE, "Soda Springs", 1133),
+						  new Landmark(TRUE, "Fort Hall", 1190),
+						  new River("Snake River Crossing", 1372, 3.0, FALSE),
+						  new Landmark(TRUE, "Fort Boise", 1486),
+						  new Landmark(FALSE, "Blue Mountains", 1646),
+						  new Landmark(FALSE, "The Dalles", 1771),
+						  new Landmark(TRUE, "Williamette Valley", 1871),
+						  new Landmark(FALSE, "Oregon City", 2000));
 		}
 
 		public function nextLandmark()
@@ -387,6 +413,67 @@
 				$this->_month = $this->_months[$monthI];
 			}
 		}
+
+		# Binary searches the locations array for a specified landmark given a distance
+		# Gets returned in the format [index, object] or null if nothing was found
+		public function getLandmark($distance)
+		{
+			$hi = count($this->_locations) - 1;
+			$lo = 0;
+
+			while ($lo != $hi)
+			{
+				$mid = floor(($hi + $lo) / 2);
+
+				if ($this->_locations[$mid]->_distance == $distance)
+				{
+					return array($mid, $this->_locations[$mid]);
+				}
+				else if ($distance < $this->_locations[$mid]->_distance)
+				{
+					$hi = $mid - 1;
+				}
+				else if ($distance > $this->_locations[$mid]->_distance)
+				{
+					$lo = $mid + 1;
+				}
+			}
+
+			// Check a size-1 partition just in case
+			if ($this->_locations[$hi]->_distance == $distance)
+			{
+				return array( $hi, $this->_locations[$hi] );
+			}
+			else
+			{
+				return null;
+			}
+		}
 	}
 
-?>
+# Found on the PHP website
+function erase_session()
+{
+	// Initialize the session.
+	// If you are using session_name("something"), don't forget it now!
+	session_start();
+
+	// Unset all of the session variables.
+	$_SESSION = array();
+
+	// If it's desired to kill the session, also delete the session cookie.
+	// Note: This will destroy the session, and not just the session data!
+	if (ini_get("session.use_cookies")) {
+		$params = session_get_cookie_params();
+		setcookie(session_name(), '', time() - 42000,
+			$params["path"], $params["domain"],
+			$params["secure"], $params["httponly"]
+		);
+	}
+
+	// Finally, destroy the session.
+	session_destroy();
+}
+
+# Since this is a pure PHP file, it's best practice to leave the end tag off
+# to avoid extraneous whitespace issues

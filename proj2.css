@@ -5,6 +5,9 @@
 }
 
 #div_game {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	background-color: black;
 	color: white;
 	text-align: left;
@@ -24,4 +27,42 @@ input[type="number"] {
 	color: inherit;
 	font-family: inherit;
 	width: 100px;
+}
+
+body {
+	color: white;
+	font-family: 'Press Start 2P', cursive;
+}
+
+td, th {
+	padding: 8px;
+}
+
+td[colspan] {
+	text-align: center;
+}
+
+hr {
+	border: none;
+	height: 7px;
+	width: 90%;
+	background-color: red;
+}
+
+button {
+	background-color: inherit;
+	font-family: inherit;
+	color: white;
+	cursor: pointer;
+	padding: 5px;
+}
+
+
+/* Lays elements out horizontally, centers them vertically, then evenly spaces them horizontally */
+div.horizontal-layout
+{
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-around;
 }
