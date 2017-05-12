@@ -31,12 +31,12 @@
 		#heals occur at rests
 		public function heal($healRate)
 		{
-			if ($health >= 90)
+			if ($this->health >= 90)
 			{
 				$this->_illness = false;
 				$this->_illnessName = null;
 			}
-			if ($health < 100)
+			if ($this->health < 100)
 			{
 				$this->_health += $healRate;
 			}
@@ -49,7 +49,7 @@
 		}
 
 		#kills member
-		public function die()
+		public function killMember()
 		{
 			$this->_alive = false;
 		}
@@ -137,8 +137,11 @@
 		public $_supplies;	#supplies class instant
 		public $_livingMembers = 5; #licing members of the party
 		public $_rate = 3; #rate at which food is eaten
+		public $_job;
+		public $_jobVal = [["empty",0],["Banker", 1600.00], 
+							["Carpenter", 800.00],["Farmer",400.00]];
 
-		public function __construct($names, $jobCash)
+		public function __construct($names, $job)
 		{
 			# names are given to constructor and made into party members
 			$this->_members[0] = new PartyMember($names[0]);
@@ -148,7 +151,10 @@
 			$this->_members[4] = new PartyMember($names[4]);
 
 			#supplies made by passing in starting money
-			$this->_supplies = new Supplies($jobCash);
+			$this->_job = $job;
+
+			$this->_supplies = new Supplies($this->_jobVal[$job][1]);
+
 
 
 		}
@@ -170,11 +176,11 @@
 		{
 			foreach($this->_members as $body)
 			{
-				if($body->$this->_alive)
+				if($body->_alive)
 				{
-					if($body->$health <= 0)
+					if($body->_health <= 0)
 					{
-						$body->$this->_alive = false;
+						$body->_alive = false;
 						$this->_livingMembers-=1;
 					}
 				}
@@ -190,9 +196,9 @@
 			$sum = 0;
 			$average = 0;
 			foreach ($this->_members as $body) {
-				if($body->$this->_alive)
+				if($body->_alive)
 				{
-					$this->_sum += $body;
+					$sum += $body->_health;
 				}
 			}
 
@@ -225,9 +231,9 @@
 		#rest function that calls each member's heal function
 		public function rest($healRate)
 		{
-			foreach ($this->_members as $this->body) 
+			foreach ($this->_members as $body) 
 			{
-				if($this->body->_alive)
+				if($body->_alive)
 				{
 					$this->body->heal($healRate);
 				}
@@ -355,6 +361,8 @@
 			$this->_date = $date;
 			$this->_month = $month;
 
+			$this->_distance = 0;
+			$this->_weather = "sunny";
 			$_distance = 0;
 			$_weather = "sunny";
 			$this->_locations = array( new River("Kansas River Crossing", 102, 2, TRUE),
@@ -380,7 +388,7 @@
 			#searches the array for the next highest location based on
 			#current location
 			foreach ($this->_locations as $local) {
-				if($this->_distance < $local->$this->_distance)
+				if($this->_distance < $local->$_distance)
 					{
 						return $local;
 					}			
