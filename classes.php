@@ -138,7 +138,8 @@
 		public $_livingMembers = 5; #licing members of the party
 		public $_rate = 3; #rate at which food is eaten
 		public $_job;
-		public $_jobVal = [["Banker", 1600.00], ["Carpenter", 800.00],["Farmer",400.00]];
+		public $_jobVal = [["empty",0],["Banker", 1600.00], 
+							["Carpenter", 800.00],["Farmer",400.00]];
 
 		public function __construct($names, $job)
 		{
@@ -167,7 +168,7 @@
 		#food is reduced based on living party members and ration rate
 		public function eat()
 		{
-			$this->_supplies->eat($_rate * $_livingMembers);
+			$this->_supplies->eat($this->_rate * $this->_livingMembers);
 		}
 
 		#checks if any members can be killed (has 0 health)
@@ -175,11 +176,11 @@
 		{
 			foreach($this->_members as $body)
 			{
-				if($body->$_alive)
+				if($body->_alive)
 				{
-					if($body->$health <= 0)
+					if($body->_health <= 0)
 					{
-						$body->$_alive = false;
+						$body->_alive = false;
 						$this->_livingMembers-=1;
 					}
 				}
@@ -195,13 +196,13 @@
 			$sum = 0;
 			$average = 0;
 			foreach ($this->_members as $body) {
-				if($body->$_alive)
+				if($body->_alive)
 				{
-					$this->_sum += $body;
+					$sum += $body->_health;
 				}
 			}
 
-			$average = $sum / $_livingMembers;
+			$average = $sum / $this->_livingMembers;
 
 
 			if($average <= 0)
@@ -232,7 +233,7 @@
 		{
 			foreach ($this->_members as $body) 
 			{
-				if($body->$_alive)
+				if($body->_alive)
 				{
 					$body->heal($healRate);
 				}
