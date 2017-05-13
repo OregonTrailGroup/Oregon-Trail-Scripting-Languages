@@ -19,7 +19,7 @@ $end = intval($_GET["endLocation"]);
 
 # Weather changes
 
-$month = $SESSION["playerJourney"]->_month;
+$month = $_SESSION["playerJourney"]->_month;
 
 # It's more likely to rain in spring & fall
 if (( $month >= 2 && $month < 5 ) || ( $month >= 8 && $month < 11)) 
@@ -68,9 +68,9 @@ switch($newWeather)
         break;
 }
 
-if ($newWeather != $SESSION["playerJourney"]->_weather)
+if ($newWeather != $_SESSION["playerJourney"]->_weather)
 {
-    $SESSION["playerJourney"]->_weather = $newWeather;
+    $_SESSION["playerJourney"]->_weather = $newWeather;
     $maxEvents--;
     $events["weather_change"] = 
         array("weather" => $newWeather, "slow_factor" => $slowFactor);
@@ -88,7 +88,7 @@ if ($maxEvents > 0)
         $itemStolen = rand(0, 7);
         $maxStolen = array(50, 100, 30, 4, 1, 1, 1, 3);
         $amountStolen = rand(1, $maxStolen[$itemStolen]);
-        $amountStolen = -$SESSION["playParty"]->setItem($itemStolen, -$amountStolen);
+        $amountStolen = -$_SESSION["playParty"]->_supplies->setItem($itemStolen, -$amountStolen);
         $events["thief_steal"] = array("id" => $itemStolen, "qty" => $amountStolen);
     }
 }
@@ -103,7 +103,7 @@ if ($maxEvents > 0)
     {
         $maxEvents--;
         $brokenPart = rand(0,2);
-        $SESSION["playParty"]->setItem(4 + $brokenPart, -1);
+        $_SESSION["playParty"]->_supplies->setItem(4 + $brokenPart, -1);
         $events["wagon_broke"] = array("wagonPart", $brokenPart);
     }
 }
@@ -120,14 +120,14 @@ if ($maxEvents > 0)
         $foundItem = rand(0, 7);
         $maxFound = array(50, 50, 30, 4, 1, 1, 1, 1);
         $amountFound = rand(1, $maxFound[$foundItem]);
-        $SESSION["playParty"]->setItem($foundItem, $amountFound);
+        $_SESSION["playParty"]->_supplies->setItem($foundItem, $amountFound);
         $events["find_wagon"] = array("id" => $foundItem, "qty" => $amountFound);
     }
 }
 
 # Grave marker
 
-$db = new OregonTrailDatabase("eritte2", "eritte2");
+$db = new OregonTrailDatabase("root", "eritte2");
 
 if ($db->connect())
 {
@@ -143,21 +143,21 @@ if ($db->connect())
 if ($maxEvents > 0)
 {
     # Higher paces are detrimental to your health
-    $paceMultiplier = ($SESSION["playerJourney"]->_speed - 10) / 10;
+    $paceMultiplier = ($_SESSION["playerJourney"]->_speed - 10) / 10;
     # Bad weather + poor clothes choices = worse health
-    $weatherMultiplier = $SESSION["playerJourney"]->_weather == "sunny"? 1 : 1.5 + 
-        ($SESSION["playParty"]->_livingMembers * 2 - $SESSION["playParty"]->_supplies->_clothes);
+    $weatherMultiplier = $_SESSION["playerJourney"]->_weather == "sunny"? 1 : 1.5 + 
+        ($_SESSION["playParty"]->_livingMembers * 2 - $_SESSION["playParty"]->_supplies->_clothes);
     
     $sick_chance = rand(1,100) * ($paceMultiplier + $weatherMultiplier);
 
     # You get sick if your sick chance is greater than 95
-    if ($sick_chance > 95)
+    if ($sick_chance > 99)
     {
         $lowestHealth = 150;
         $personIndex = -1;
 
         # Person with the lowest health gets sick
-        foreach ($SESSION["playParty"]->_members as $index => $member)
+        foreach ($_SESSION["playParty"]->_members as $index => $member)
         {
             if ($member->_alive && $member->_health < $lowestHealth)
             {
@@ -170,7 +170,7 @@ if ($maxEvents > 0)
         $sickName = rand(0, count($sickNames) - 1);
         $sickDamage = $paceMultiplier * $weatherMultiplier * 2;
 
-        $SESSION["playParty"]->_members[$personIndex]->catchCold($sickNames[$sickName], $sickDamage);
+        $_SESSION["playParty"]->_members[$personIndex]->catchCold($sickNames[$sickName], $sickDamage);
         $events["got_sick"] = array("partyMember" => $personIndex, "sickName" => $sickNames[$sickName]);
     }
 }

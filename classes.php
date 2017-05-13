@@ -442,11 +442,9 @@
 		{
 			$this->_date = $date;
 			$this->_month = $month;
-
+			$this->_speed = 20;
 			$this->_distance = 0;
 			$this->_weather = "sunny";
-			$_distance = 0;
-			$_weather = "sunny";
 			$this->_locations = array( new River("Kansas River Crossing", 102, 2, TRUE),
 					      new River("Big Blue River Crossing", 185, 2.3, FALSE),
 					      new Landmark(TRUE, "Fort Kearney", 304),
@@ -477,6 +475,7 @@
 				}
 		}
 
+		# Advances the party via their speed
 		public function progress()
 		{
 			$nextLandmark = $this->nextLandmark();
