@@ -292,12 +292,15 @@
 		public $_shopIndex; # if this has a shop, the index of the shop
 		public $_name; #name of the landmark
 		public $_distance;	#distance along the trail
+		public $_image;
 
-		public function __construct($hasShop, $name, $distance)
+		public function __construct($hasShop, $name, $distance, $image)
 		{
 			$this->_hasShop = $hasShop;
 			$this->_name = $name;
 			$this->_distance = $distance;
+			$this->_image = $image;
+
 			
 			if ($this->_hasShop == TRUE)
 			{
@@ -319,10 +322,10 @@
 		public $_depth; #depth of the river, invluences fording and rafting
 		public $_hasFerry; #wheter a ferry is avalable or not
 
-		public function __construct($name, $distance, $depth, $hasFerry)
+		public function __construct($name, $distance, $image, $depth, $hasFerry)
 		{
 			#notice the super ensures there is no shop avalable
-			parent::__construct(false, $name, $distance);
+			parent::__construct(false, $name, $distance, $image);
 
 			$this->_depth = $depth;
 			$this->_hasFerry = $hasFerry;
@@ -381,33 +384,39 @@
 			$this->_weather = "sunny";
 			$_distance = 0;
 			$_weather = "sunny";
-			$this->_locations = array( new River("Kansas River Crossing", 102, 2, TRUE),
-					      new River("Big Blue River Crossing", 185, 2.3, FALSE),
-					      new Landmark(TRUE, "Fort Kearney", 304),
-					      new Landmark(FALSE, "Chimney Rock", 554),
-						  new Landmark(TRUE, "Fort Laramie", 640),
-						  new Landmark(FALSE, "Independence Rock", 830),
-						  new Landmark(FALSE, "South Pass", 932),
-						  new River("Green River Crossing", 989, 2.6, TRUE),
-						  new Landmark(FALSE, "Soda Springs", 1133),
-						  new Landmark(TRUE, "Fort Hall", 1190),
-						  new River("Snake River Crossing", 1372, 3.0, FALSE),
-						  new Landmark(TRUE, "Fort Boise", 1486),
-						  new Landmark(FALSE, "Blue Mountains", 1646),
-						  new Landmark(FALSE, "The Dalles", 1771),
-						  new Landmark(TRUE, "Williamette Valley", 1871),
-						  new Landmark(FALSE, "Oregon City", 2000));
+			$this->_locations = array( new River("Kansas River Crossing", 102, 
+								"assets/river1.jpg", 2, TRUE),
+					      new River("Big Blue River Crossing", 185, 
+					      		"assets/river2.jpg", 2.3, FALSE),
+					      new Landmark(TRUE, "Fort Kearney", 304, "assets/land1.jpg"),
+					      new Landmark(FALSE, "Chimney Rock", 554, "assets/land2.jpg"),
+						  new Landmark(TRUE, "Fort Laramie", 640, "assets/land3.jpg"),
+						  new Landmark(FALSE, "Independence Rock", 830, "assets/land4.jpg"),
+						  new Landmark(FALSE, "South Pass", 932, "assets/land5.jpg"),
+						  new River("Green River Crossing", 989, 
+						  		"assets/river3.jpg",2.6, TRUE),
+						  new Landmark(FALSE, "Soda Springs", 1133, "assets/land6.jpg"),
+						  new Landmark(TRUE, "Fort Hall", 1190, "assets/land7.jpg"),
+						  new River("Snake River Crossing", 1372, 
+						  	"assets/river4.jpg", 3.0, FALSE),
+						  new Landmark(TRUE, "Fort Boise", 1486, "assets/land8.jpg"),
+						  new Landmark(FALSE, "Blue Mountains", 1646, "assets/land9.jpg"),
+						  new Landmark(FALSE, "The Dalles", 1771, "assets/land10.jpg"),
+						  new Landmark(TRUE, "Williamette Valley", 1871, "assets/land11.jpg"),
+						  new Landmark(FALSE, "Oregon City", 2000, null));
 		}
 
 		public function nextLandmark()
 		{
 			#searches the array for the next highest location based on
 			#current location
+			$count = 0;
 			foreach ($this->_locations as $local) {
-				if($this->_distance < $local->$_distance)
+				if($this->_distance < $local->_distance)
 					{
-						return $local;
-					}			
+						return $count;
+					}
+					$count +=1;
 				}
 		}
 
