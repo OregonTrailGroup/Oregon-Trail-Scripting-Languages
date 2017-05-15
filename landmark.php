@@ -6,7 +6,7 @@ include "commonUI.php";
 startHTML("landmark");
 
 $i =  $_GET["index"];
-$local = $_SESSION["playerJourney"]->_locations[$i];
+$local = $_SESSION["playerJourney"]->getLandmark($_SESSION["playerJourney"]->_distance)[1];
 $image = $local->_image;
 $name =  $local->_name;
 
@@ -26,8 +26,6 @@ else
 
 <form action="<?php echo $destination;?>">
 	<input type = "hidden" name="source" value="landmark.php">
-	<input type = "hidden" name="index" value="<?php echo $i;?>">
-	<input type = "hidden" name="name" value="<?php echo $name;?>">
     <input type = "submit" value="Continue">  
 </form>
 

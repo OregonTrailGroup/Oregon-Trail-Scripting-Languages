@@ -1,33 +1,45 @@
 <?php
 include "classes.php";
 session_start();
-
+include "commonUI.php";
 include "commonActions.php";
+startHTML("landmark");
 
-$i =  $_GET["index"];
-$local = $_SESSION["playerJourney"]->_locations[$i];
 
-$name =  $_GET["$name"];
-$isRiver =  $_GET["$isRiver"];
-$hasShop = $_GET["$hasShop"];
+$local = $_SESSION["playerJourney"]->getLandmark($_SESSION["playerJourney"]->_distance)[1];
+
+$name =  $local->_name;
 
 if(strcmp(get_class($local), "River")==0)
 {
 	$isRiver = true;
 }
-else{	$isRiver = false;}
+else{$isRiver = false;}
 
 $hasShop = $local->_hasShop;
 
 
 if($isRiver)
 {
-	showRiverActions($local[$i]->_hasFerry);
+	showRiverActions($local->_hasFerry);
+	if(isset($_GET["fording"]))
+	{
+		$out=$local.ford();
+		if($out==1)
+		{
+
+		}
+		elseif ($out==1) {
+		}
+	}
 }
 
 else{
 	showActions($hasShop, false);
-}?>
+}
+
+
+?>
 <p></p>
 
 <?php
