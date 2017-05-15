@@ -89,42 +89,109 @@
 
 		public function setItem($ID, $amount)
 		{
+			$changeAmt = $amount;
+
 			switch ($ID)
 			{ 
 			case 0:
-				$this->_food += $amount;
+				# Prevents amounts from going below 0
+				if ( -$amount <= $this->_food)
+				{
+					$this->_food += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_food;
+					$this->_food = 0;
+				}
 				break;
 				
 			case 1:
-				$this->_money += $amount;
+                if ( -$amount  <= $this->_money)
+				{
+					$this->_money += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_money;
+					$this->_money = 0;
+				}
 				break;
 
 			case 2:
-				$this->_bait += $amount;
+                if ( -$amount  <= $this->_bait)
+				{
+					$this->_bait += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_bait;
+					$this->_bait = 0;
+				}
 				break;
 
 			case 3:
-				$this->_clothes += $amount;
+				if ( -$amount  <= $this->_clothes)
+				{
+					$this->_clothes += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_clothes;
+					$this->_clothes = 0;
+				}
 				break;
 
 			case 4:
-				$this->_wagonWheels += $amount;
+				if ( -$amount  <= $this->_wagonWheels)
+				{
+					$this->_wagonWheels += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_wagonWheels;
+					$this->_wagonWheels = 0;
+				}
 				break;
 
 			case 5:
-				$this->_wagonAxle += $amount;
+				if ( -$amount  <= $this->_wagonAxle)
+				{
+					$this->_wagonAxle += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_wagonAxle;
+					$this->_wagonAxle = 0;
+				}
 				break;
 
 			case 6:
-				$this->_wagonTongue += $amount;
+                if ( -$amount  <= $this->_wagonTongue)
+				{
+					$this->_wagonTongue += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_wagonTongue;
+					$this->_wagonTongue = 0;
+				}
 				break;
 
 			case 7:
-				$this->_oxen += $amount;
+                if ( -$amount  <= $this->_oxen)
+				{
+					$this->_oxen += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_oxen;
+					$this->_oxen = 0;
+				}
 				break;
 			}
 
-
+			return $changeAmt;
 		}
 
 	}
@@ -170,7 +237,21 @@
 		#food is reduced based on living party members and ration rate
 		public function eat()
 		{
-			$this->_supplies->eat($this->_rate * $this->_livingMembers);
+			foreach ($this->_members as $member)
+			{
+				if ($member->_alive)
+				{
+					if ($this->_rate >= $this->_supplies->_food)
+					{
+						$this->_supplies->eat($this->_rate);
+					}
+					else
+					{
+						# Party member harmed when they don't eat
+						$member->_health -= 5;
+					}
+				}
+			}
 		}
 
 		#checks if any members can be killed (has 0 health)
@@ -373,13 +454,14 @@
 		public $_date; #current date, constantlly increments 
 		public $_month;
 		public $_distance; #distance traveled
+		public $_speed; # Travel rate, either 20, 30, or 40 depending on pace
 		public $_weather; #current weather, effects events
 		public $_locations; #array of all landmarks
 		public function __construct($date, $month)
 		{
 			$this->_date = $date;
 			$this->_month = $month;
-
+			$this->_speed = 20;
 			$this->_distance = 0;
 			$this->_weather = "sunny";
 			$_distance = 0;
@@ -418,6 +500,19 @@
 					}
 					$count +=1;
 				}
+		}
+
+		# Advances the party via their speed
+		public function progress()
+		{
+			$nextLandmark = $this->nextLandmark();
+			$this->_distance += $this->_speed;
+			if ($this->_distance > $nextLandmark)
+			{
+				$this->_distance = $nextLandmark;
+			}
+
+			return $this->_distance;
 		}
 
 		#increments the day
