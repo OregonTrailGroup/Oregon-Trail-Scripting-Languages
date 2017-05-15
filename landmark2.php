@@ -3,11 +3,14 @@ include "classes.php";
 session_start();
 
 include "commonActions.php";
+include "commonUI.php";
+startHTML("landmark");
 
 $local = $_SESSION["playerJourney"]->getLandmark($_SESSION["playerJourney"]->_distance)[1];
 $name =  $_GET["$name"];
-$isRiver =  $_GET["$isRiver"];
-$hasShop = $_GET["$hasShop"];
+$name =  $local->_name;
+
+$hasShop = $local->_hasShop;
 
 if(strcmp(get_class($local), "River")==0)
 {
@@ -20,7 +23,7 @@ $hasShop = $local->_hasShop;
 
 if($isRiver)
 {
-	showRiverActions($local[$i]->_hasFerry);
+	showRiverActions($local->_hasFerry);
 	if(isset($_GET["fording"]))
 	{
 		$chance = $local->ford();
@@ -31,12 +34,16 @@ if($isRiver)
         	$amountLost = rand(1, $amountLost[$lostItem]);
         	$_SESSION["playParty"]->_supplies->setItem($lostItem, -$amountLost);
         	$str =  "Lost " . $amountLost . " " . $lostItem;
-        	?>
-        	<?php echo $str;?>
+        	
+		}
+		else{
+			$str = "Forded Safely";
+		}
+		?>	
+		<br><br><?php echo $str;?><br><br>
 			<a href="travel.php"><button>Back To Travel</button></a>
 			<?php
 
-		}
 	}
 	elseif (isset($_GET["ferrying"]))
 	{

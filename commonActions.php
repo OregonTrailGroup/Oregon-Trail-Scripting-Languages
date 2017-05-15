@@ -1,16 +1,7 @@
 <?php
-	include 'commonUI.php';
-	startHTML();
-?>
-<html>
-<head>
-
-</head>
-<body>
-<?php
 	function showActions($hasShop, $initiallyHidden){
 		//$hasShop = true;
-		if(!$hasShop || !$initiallyHidden){
+		if(!$hasShop || $initiallyHidden){
 			?>
 			<style>
 			.button_hide_shop {
@@ -19,7 +10,7 @@
 			</style>
 			<?php
 		}
-		if(!$initiallyHidden){
+		if($initiallyHidden){
 			?>
 			<style>
 			.button_hide {
@@ -79,9 +70,4 @@
 <button id="button_info">get more information</button><br>
 <?php
 	}
-?>
-
-</body></html>
-<?php
-	endHTML();
 ?>

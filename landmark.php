@@ -8,7 +8,6 @@ startHTML("landmark");
 $local = $_SESSION["playerJourney"]->getLandmark($_SESSION["playerJourney"]->_distance)[1];
 $image = $local->_image;
 $name =  $local->_name;
-echo $name;
 if(strcmp($name, "The Dalles")==0)
 {
 	$destination = "LastRiver.php";
