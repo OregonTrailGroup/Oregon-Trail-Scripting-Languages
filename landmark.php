@@ -5,16 +5,13 @@ session_start();
 include "commonUI.php";
 startHTML("landmark");
 
-$i =  $_GET["index"];
-$local = $_SESSION["playerJourney"]->_locations[$i];
+$local = $_SESSION["playerJourney"]->getLandmark($_SESSION["playerJourney"]->_distance);
 $image = $local->_image;
 $name =  $local->_name;
-
-
-
+echo $name;
 if(strcmp($name, "The Dalles")==0)
 {
-	$destination = "lastriver.php";
+	$destination = "LastRiver.php";
 }
 else
 {
@@ -31,7 +28,7 @@ else
     <input type = "submit" value="Continue">  
 </form>
 
-<img src="<?php echo $image;?>" alt="Loction"/>
+<img src="<?php echo $image;?>" alt="Location"/>
 
 </p>
 <?php
