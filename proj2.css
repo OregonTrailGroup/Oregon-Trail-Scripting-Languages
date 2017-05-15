@@ -1,4 +1,4 @@
-#div_wrapper {
+#div_wrapper, .vertical-layout {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -6,6 +6,7 @@
 
 #div_game {
 	display: flex;
+	position: relative; /* Makes overlays get positioned relative to this container */
 	flex-direction: column;
 	align-items: center;
 	background-color: black;
@@ -57,6 +58,51 @@ button {
 	padding: 5px;
 }
 
+div.overlay
+{
+	background-color: inherit;
+	position: absolute;
+	text-align: center;
+	padding: 10px;
+	width: 100%;
+	height: 100%;
+}
+
+table.river
+{
+	width: 75%;
+	height: 75%;
+}
+
+.water
+{
+	background-color: #5cb5fb;
+	text-align: center;
+}
+
+.wagon
+{
+	background-image: url("assets/Wagon.png") !important;
+	background-position: center;
+	background-size: 100%;
+}
+
+.land
+{
+	background-color: brown;
+}
+
+.rock
+{
+	background-image: url("assets/Rock.png");
+	background-position: center;
+	background-size: 100%;
+}
+
+.inline
+{
+	display:inline;
+}
 
 /* Lays elements out horizontally, centers them vertically, then evenly spaces them horizontally */
 div.horizontal-layout
