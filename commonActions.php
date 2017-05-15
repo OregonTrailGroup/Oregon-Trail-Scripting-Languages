@@ -28,18 +28,22 @@
 			<?php
 		}
 ?>
-	
-	
+
 <div id="common_Buttons">
 	<!-- regular options as specified in the issue -->
 	<button class="button_hide" id="button_supplies">2. check supplies</button><br>
-	<a href="Map.php"><button class="button_hide" id="button_map">3. look at map</button></a><br>
+	<a href="Map.php?sourcePage=".__FILE__><button class="button_hide" id="button_map">3. look at map</button></a><br>
 	<button class="button_hide" id="button_rest">4. stop to rest</button><br>
-	<a href="Trade.php"><button class="button_hide" id="button_trade">5. attempt to trade</button></a><br>
-	<a href="Fish.php"><button class="button_hide" id="button_fish">6. fish for food</button></a><br>
-	<a href="Shop.php"><button class="button_hide_shop" id="button_shop" >7. buy supplies</button></a><br>
+	<a href="Trade.php?sourcePage=".__FILE__><button class="button_hide" id="button_trade">5. attempt to trade</button></a><br>
+	<a href="Fish.php?sourcePage=".__FILE__><button class="button_hide" id="button_fish">6. fish for food</button></a><br>
+	<a href="Shop.php?sourcePage=".__FILE__><button class="button_hide_shop" id="button_shop" >7. buy supplies</button></a><br>
 	<br>
 </div>
+
+<div id=""style="display:none;">
+	
+</div>
+
 
 <div id="supply_div" style="display:none;">
 	<!-- check session vars to display supplies -->
