@@ -4,7 +4,7 @@ session_start();
 
 include "commonActions.php";
 
-$local = $_SESSION["playerJourney"]->getLandmark($_SESSION["playerJourney"]->_distance);
+$local = $_SESSION["playerJourney"]->getLandmark($_SESSION["playerJourney"]->_distance)[1];
 $name =  $_GET["$name"];
 $isRiver =  $_GET["$isRiver"];
 $hasShop = $_GET["$hasShop"];

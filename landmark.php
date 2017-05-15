@@ -5,7 +5,7 @@ session_start();
 include "commonUI.php";
 startHTML("landmark");
 
-$local = $_SESSION["playerJourney"]->getLandmark($_SESSION["playerJourney"]->_distance);
+$local = $_SESSION["playerJourney"]->getLandmark($_SESSION["playerJourney"]->_distance)[1];
 $image = $local->_image;
 $name =  $local->_name;
 echo $name;
