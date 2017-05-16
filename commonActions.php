@@ -40,24 +40,41 @@
 	<br>
 </div>
 
-<div id=""style="display:none;">
-	
+<div id="rest_div" style="display:none;">
+	<form action="" method="get">
+	"How many days of rest?"
+	<input type="number" min="0" max="9" name="restDays" onkeyPress="isEnter(event)">
+	<br>
+	<input type="submit" value="Rest" id="userDays">
+	</form>
 </div>
 
 
 <div id="supply_div" style="display:none;">
 	<!-- check session vars to display supplies -->
 	<h3>Your Supplies:</h3>
-	oxen&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<?php echo $_SESSION["playParty"]->_supplies->_oxen ?><br>
-	sets of clothing&emsp;<?php echo $_SESSION["playParty"]->_supplies->_clothes ?><br>
-	bait&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;<?php echo $_SESSION["playParty"]->_supplies->_bait ?><br>
-	wagon wheels&emsp;&nbsp;&nbsp;<?php echo $_SESSION["playParty"]->_supplies->_wagonWheels ?><br>
-	wagon axles&emsp;&nbsp;&emsp;<?php echo $_SESSION["playParty"]->_supplies->_wagonAxle ?><br>
-	wagon tongues&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_SESSION["playParty"]->_supplies->_wagonTongue ?><br>
-	pounds of food&emsp;<?php echo $_SESSION["playParty"]->_supplies->_food ?><br>
-	money left&emsp;&nbsp;&nbsp;&nbsp;&emsp;<?php echo $_SESSION["playParty"]->_supplies->_money ?><br>
-
-	<button id="return_button">Return to menu</button>
+	
+	<p style="display:inline-block">
+	oxen<br>
+	sets of clothing<br>
+	bait<br>
+	wagon wheels<br>
+	wagon axles<br>
+	wagon tongues<br>
+	pounds of food<br>
+	money left<br>
+	</p>
+	<p style="display:inline-block">
+	<?php echo $_SESSION["playParty"]->_supplies->_oxen ?><br>
+	<?php echo $_SESSION["playParty"]->_supplies->_clothes ?><br>
+	<?php echo $_SESSION["playParty"]->_supplies->_bait ?><br>
+	<?php echo $_SESSION["playParty"]->_supplies->_wagonWheels ?><br>
+	<?php echo $_SESSION["playParty"]->_supplies->_wagonAxle ?><br>
+	<?php echo $_SESSION["playParty"]->_supplies->_wagonTongue ?><br>
+	<?php echo $_SESSION["playParty"]->_supplies->_food ?><br>
+	<?php echo $_SESSION["playParty"]->_supplies->_money ?><br>
+	</p>
+	<br><button id="return_button">Return to menu</button>
 	
 </div>
 <?php
@@ -96,6 +113,14 @@ To use a ferry means to put your wagon on top of a flat boat that belongs to som
 ?>
 <script>
 	$(document).ready(function(){
+		
+		//$("input[id="userDays"]").click(function(){
+		//	$
+		//});
+		
+		$("button#button_rest").click(function(){
+			$("#rest_div").toggle();
+		});
 		$("button#button_supplies").click(function(){
 			$("#supply_div").toggle();
 			$("#common_Buttons").toggle();
