@@ -4,7 +4,7 @@ include "classes.php";
 session_start();
 include "commonUI.php";
 $lastLand = $_SESSION["playerJourney"]->nextLandmark();
-echo $lastLand;
+//echo $lastLand;
 //$distanceTrav -= 1;
 ?>
 	<div id="div_map" >
