@@ -33,12 +33,10 @@
 </div>
 
 <div id="rest_div" style="display:none;">
-	<form action="" method="get">
 	"How many days of rest?"
 	<input type="number" min="0" max="9" id="restDays" onkeyPress="isEnter(event)">
 	<br>
 	<button id="userDays">Rest</Button>
-	</form>
 </div>
 
 <div id="supply_div" style="display:none;">
@@ -71,7 +69,9 @@
 
 <script>
 	$(document).ready(function(){
+		//function called by travel when the player stopsand asks for the menu
 		
+		//
 		$("button#userDays").click(function(){
 			var num = $("#restDays").val();
 			//alert(num);
@@ -102,7 +102,8 @@
 ?>
 <?php
 	function showRiverActions($hasFerry, $sourcePage){
-		//$hasShop = true;
+		//function called from outside files that shows 
+		//the options the player has when they reach a river landmark
  		if(!$hasFerry){
  			?>
  			<style>
@@ -121,18 +122,20 @@
 <a href="landmark2.php?ferrying&sourcePage=<?php echo $sourcePage; ?>"><button class="button_hide_ferry" id="button_ferry">take a ferry across</button></a><br>
 </div>
 
-<div id="river_info" style="display:none;" class="vertical-layout">
+<!-- hidden div for the river information -->
+<div id="river_info" style="display:none;">
 <p style="display:inline-block">
 <ul><li>To ford a river means to pull your wagon across a shallow part of the river, with the oxen still attached.</li>
 <li>To caulk the wagon means to seal it so that no water can get in. The wagon can then be floated across like a boat.</li>
 <li>To use a ferry means to put your wagon on top of a flat boat that belongs to someone else. The owner of the ferry will take your wagon across the river.</li>
 </p>
 <button id="continue_button">Click to continue</button>
-<div/>
+</div>
 
 <script>
 	$(document).ready(function(){
-
+		
+		//toggling functions for showing and hiding the river info
 		$("button#button_info").click(function(){
 			$("#river_info").toggle();
 			$("#river_div").toggle();
