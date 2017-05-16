@@ -57,14 +57,14 @@
 	money left<br>
 	</p>
 	<p style="display:inline-block">
-	<span><?php echo $_SESSION["playParty"]->_supplies->_oxen ?></span><br>
-	<span><?php echo $_SESSION["playParty"]->_supplies->_clothes ?></span><br>
-	<span><?php echo $_SESSION["playParty"]->_supplies->_bait ?></span><br>
-	<span><?php echo $_SESSION["playParty"]->_supplies->_wagonWheels ?></span><br>
-	<span><?php echo $_SESSION["playParty"]->_supplies->_wagonAxle ?></span><br>
-	<span><?php echo $_SESSION["playParty"]->_supplies->_wagonTongue ?></span><br>
-	<span><?php echo $_SESSION["playParty"]->_supplies->_food ?></span><br>
-	<span><?php echo $_SESSION["playParty"]->_supplies->_money ?></span><br>
+	<span id="oxenSpan"><?php echo $_SESSION["playParty"]->_supplies->_oxen ?></span><br>
+	<span id="clotSpan"><?php echo $_SESSION["playParty"]->_supplies->_clothes ?></span><br>
+	<span id="baitSpan"><?php echo $_SESSION["playParty"]->_supplies->_bait ?></span><br>
+	<span id="wheeSpan"><?php echo $_SESSION["playParty"]->_supplies->_wagonWheels ?></span><br>
+	<span id="axleSpan"><?php echo $_SESSION["playParty"]->_supplies->_wagonAxle ?></span><br>
+	<span id="tongSpan"><?php echo $_SESSION["playParty"]->_supplies->_wagonTongue ?></span><br>
+	<span id="foodSpan"><?php echo $_SESSION["playParty"]->_supplies->_food ?></span><br>
+	<span id="moneSpan"><?php echo $_SESSION["playParty"]->_supplies->_money ?></span><br>
 	</p>
 	<br><button id="return_button">Return to menu</button>
 	
