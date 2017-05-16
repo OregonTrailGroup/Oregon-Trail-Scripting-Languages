@@ -10,15 +10,15 @@ startHTML("View Hiscores");
         <br><img src="assets/Separator2.png"><br>
         <br>
 
-        <p class="p_inline">
+        <p>
             Name<br>
         </p>
 
-        <p class="p_inline">
+        <p>
             Points<br>
         </p>
 
-        <p class="p_inline">
+        <p>
             Rating<br>
         </p>
         <br><br>
