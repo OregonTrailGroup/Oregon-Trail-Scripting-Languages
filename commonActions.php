@@ -117,14 +117,16 @@
 <!-- river options, depth does not affect the options given to player -->
 <a href="landmark2.php?fording&sourcePage=<?php echo $sourcePage; ?>"><button id="button_ford">attempt to ford The river</button></a><br>
 <a href="landmark2.php?caulking&sourcePage=<?php echo $sourcePage; ?>"><button id="button_caulk">caulk the wagon and float it across</button></a><br>
-<a href="landmark2.php?sourcePage=<?php echo $sourcePage; ?>"><button id="button_info">get more information</button></a><br>
+<button id="button_info">get more information</button><br>
 <a href="landmark2.php?ferrying&sourcePage=<?php echo $sourcePage; ?>"><button class="button_hide_ferry" id="button_ferry">take a ferry across</button></a><br>
 </div>
 
-<div id="river_info" style="display:none;">
-To ford a river means to pull your wagon across a shallow part of the river, with the oxen still attached.<br>
-To caulk the wagon means to seal it so that no water can get in. The wagon can then be floated across like a boat.<br>
-To use a ferry means to put your wagon on top of a flat boat that belongs to someone else. The owner of the ferry will take your wagon across the river.<br>
+<div id="river_info" style="display:none;" class="vertical-layout">
+<p style="display:inline-block">
+<ul><li>To ford a river means to pull your wagon across a shallow part of the river, with the oxen still attached.</li>
+<li>To caulk the wagon means to seal it so that no water can get in. The wagon can then be floated across like a boat.</li>
+<li>To use a ferry means to put your wagon on top of a flat boat that belongs to someone else. The owner of the ferry will take your wagon across the river.</li>
+</p>
 <button id="continue_button">Click to continue</button>
 <div/>
 
