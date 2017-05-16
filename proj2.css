@@ -104,6 +104,30 @@ table.river
 	display:inline;
 }
 
+.greenbox
+{
+	background-color: greenyellow;
+	height: 100px;
+	width: 100%;
+}
+
+@keyframes wagonGo
+{
+	0% { transform: translate(0px, 0px) rotate(0deg); }
+	16% { transform: translate(0px, -20px) rotate(0deg); }
+	33% { transform: translate(0px, -20px) rotate(-33deg); }
+	50% { transform: translate(0px, -20px) rotate(33deg); }
+	66% { transform: translate(0px, -20px) rotate(-33deg); }
+	83% { transform: translate(0px, -20px) rotate(0deg); }
+	100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+.animatedWagon
+{
+	animation: wagonGo 4s infinite;
+	transform-origin: center center;
+}
+
 /* Lays elements out horizontally, centers them vertically, then evenly spaces them horizontally */
 div.horizontal-layout
 {
