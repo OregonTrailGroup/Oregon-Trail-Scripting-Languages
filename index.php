@@ -7,7 +7,7 @@ session_start();
 startHTML("The Oregon Trail Game");
 ?>
 	<br><img src="assets/title.png"><br>
-	<br><img src="assets/separator.png"><br><br>
+	<br><img src="assets/Separator.png"><br><br>
 	<div id="div_options">
 		You may:<br><br>
 		<ul id="ul_options">
@@ -17,7 +17,7 @@ startHTML("The Oregon Trail Game");
 		</ul>
 		What is your choice?
 	</div>
-	<br><img src="assets/separator.png"><br>
+	<br><img src="assets/Separator.png"><br>
 
 <?php
 endHTML();

@@ -4,7 +4,7 @@ session_start();
 include 'commonUI.php';
 startHTML("Select Job");
 ?>
-	<br><img src="assets/separator.png"><br><br>
+	<br><img src="assets/Separator.png"><br><br>
 	<div id="div_options">
 		Many kinds of people made the trip to Oregon.<br>
 		You may:<br><br>
@@ -33,7 +33,7 @@ startHTML("Select Job");
 		</p>
 		<button class="btngrp_main" id="btn_return" onclick="toggleDivs('div_options', 'div_hidden')">CLICK to continue</button>
 	</div>
-	<br><img src="assets/separator.png"><br>
+	<br><img src="assets/Separator.png"><br>
 
 <?php
 endHTML();

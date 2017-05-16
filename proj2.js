@@ -63,6 +63,26 @@ $(document).ready(function(){
 		}
 	});
 
+	// hiscores
+	$("#btn_points").click(function(){
+		$("#div_hiscores").toggle();
+		$("#div_hidden").toggle();
+	});
+
+	$("#btn_hiscores_continue").click(function(){
+		// hides our current p tag then shows the next
+		var ele = "#p_info" + currentPTag;
+		$(ele).toggle();
+		currentPTag = currentPTag + 1;
+		var ele = "#p_info" + currentPTag;
+		$(ele).toggle();
+
+		if (currentPTag >= 3) {
+			$("#btn_info_continue").toggle();
+			$("#btn_info_return").toggle();
+		}
+	});
+
 });
 
 // default to 1

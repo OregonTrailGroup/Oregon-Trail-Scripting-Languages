@@ -2,7 +2,7 @@
 include 'commonUI.php';
 startHTML("Select Difficulty");
 ?>
-	<br><img src="assets/separator.png"><br><br>
+	<br><img src="assets/Separator.png"><br><br>
 	<div id="div_options">
 		What are the names of the people in your party?<br><br>
 		<form action="month.php" method="post">
@@ -45,7 +45,7 @@ startHTML("Select Difficulty");
 			}
 		?>
 	</div>
-	<br><img src="assets/separator.png"><br>
+	<br><img src="assets/Separator.png"><br>
 
 <?php
 endHTML();

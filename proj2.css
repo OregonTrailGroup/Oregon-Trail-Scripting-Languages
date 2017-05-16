@@ -85,4 +85,30 @@ button#btn_info_continue {
 	margin: 0 128;
 }
 
-/* START OF INFO.PHP */
+/* END OF INFO.PHP */
+/* START OF HISCORES.PHP */
+
+div#div_txtblock {
+	background-color: white;
+	color: black;
+	height: 128px;
+	width: 128px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 128px;
+}
+
+.p_inline {
+	float: left;
+	display: inline;
+}
+
+button#btn_points {
+	width: 256px;
+	border-style: solid;
+	border-width: 5px;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+/* END OF HISCORES.PHP */
