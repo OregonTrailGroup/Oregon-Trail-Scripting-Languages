@@ -1,24 +1,23 @@
 <?php
 include 'commonUI.php';
-startHTML("The Oregon Trail Game")
+
+//let's begin our session
+session_start();
+
+startHTML("The Oregon Trail Game");
 ?>
-	<p>
-		You may:
-		<div id="div_options">
-			1. Travel the trail<br>
-			2. Learn about the trail<br>
-			3. See the Oregon Top Ten<br>
-			4. Turn sound off<br>
-			5. Choose Management Options<br>
-			6. End<br>
-		</div>
-		<form action="">
-			What is your choice? <input type="number" min="1" max="6" name="input_option" onkeypress="isEnter(event)"><br>
-				<input type="submit" value="" id="submit_main_menu">
-		</form>
-	</p>
+	<br><img src="assets/title.png"><br>
+	<br><img src="assets/Separator.png"><br><br>
+	<div id="div_options">
+		You may:<br><br>
+		<ul id="ul_options">
+			<a href="start.php"><button class="btngrp_main" id="btn_main1">1.</button></a> Travel the trail<br>
+			<a href="info.php"><button class="btngrp_main" id="btn_main2">2.</button></a> Learn about the trail<br>
+			<a href="hiscores.php"><button class="btngrp_main" id="btn_main3">3.</button></a> See the Oregon Top Ten<br>
+		</ul>
+		What is your choice?
+	</div>
+	<br><img src="assets/Separator.png"><br>
 
 <?php
 endHTML();
-?>
-			

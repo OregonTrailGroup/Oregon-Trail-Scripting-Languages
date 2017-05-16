@@ -31,12 +31,12 @@
 		#heals occur at rests
 		public function heal($healRate)
 		{
-			if ($this->health >= 90)
+			if ($this->_health >= 90)
 			{
 				$this->_illness = false;
 				$this->_illnessName = null;
 			}
-			if ($this->health < 100)
+			if ($this->_health < 100)
 			{
 				$this->_health += $healRate;
 			}
@@ -588,6 +588,7 @@
 # Found on the PHP website
 function erase_session()
 {
+
 	// Initialize the session.
 	// If you are using session_name("something"), don't forget it now!
 	session_start();
