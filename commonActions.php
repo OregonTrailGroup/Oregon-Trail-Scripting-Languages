@@ -1,12 +1,4 @@
 <?php
-	
-?>
-<html>
-<head>
-<script src="./jquery.min.js"></script>
-</head>
-<body>
-<?php
 	function showActions($hasShop, $initiallyHidden){
 		//$hasShop = true;
 		if(!$hasShop || $initiallyHidden){
@@ -45,7 +37,7 @@
 	"How many days of rest?"
 	<input type="number" min="0" max="9" id="restDays" onkeyPress="isEnter(event)">
 	<br>
-	<input type="submit" value="Rest" id="userDays">
+	<button type="submit" id="userDays">Rest</Button>
 	</form>
 </div>
 
@@ -146,7 +138,3 @@ To use a ferry means to put your wagon on top of a flat boat that belongs to som
 		});
 	});
 </script>
-</body></html>
-<?php
-	
-?>
