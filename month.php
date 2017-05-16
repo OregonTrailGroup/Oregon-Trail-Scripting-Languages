@@ -1,19 +1,26 @@
 <?php
 include 'classes.php';
 session_start();
-include 'setvars.php';
 include 'commonUI.php';
 startHTML("Select Month");
+
+$names = array();
+array_push($names, $_POST['party_mem_1']);
+array_push($names, $_POST['party_mem_2']); 
+array_push($names, $_POST['party_mem_3']);
+array_push($names, $_POST['party_mem_4']);
+array_push($names, $_POST['party_mem_5']);
+$_SESSION['playParty'] = new Party($names, $_POST['job']);
 ?>
 	<br><img src="assets/Separator.png"><br><br>
 	<div id="div_options">
 		It is 1848. Your jumping off place for Oregon is Independence, Missouri. You must decide which month to leave Independence.<br><br>
-		<form action="shop.php?sourcePage=travel.php" method="post">
-			<input type="radio" value="1" name="month" class="btngrp_main" id="btn_main1" checked> March<br>
-			<input type="radio" value="2" name="month" class="btngrp_main" id="btn_main2"> April<br>
-			<input type="radio" value="3" name="month" class="btngrp_main" id="btn_main3"> May<br>
-			<input type="radio" value="4" name="month" class="btngrp_main" id="btn_main4"> June<br>
-			<input type="radio" value="5" name="month" class="btngrp_main" id="btn_main5"> July<br>
+		<form action="setvars.php" method="post">
+			<input type="radio" value="3" name="month" class="btngrp_main" id="btn_main1" checked> March<br>
+			<input type="radio" value="4" name="month" class="btngrp_main" id="btn_main2"> April<br>
+			<input type="radio" value="5" name="month" class="btngrp_main" id="btn_main3"> May<br>
+			<input type="radio" value="6" name="month" class="btngrp_main" id="btn_main4"> June<br>
+			<input type="radio" value="7" name="month" class="btngrp_main" id="btn_main5"> July<br>
 			<input type="button" value="?" class="btngrp_main" class="btngrp_main" id="btn_main6" onclick="toggleDivs('div_hidden', 'div_options')"> Ask for advice<br><br>
             
             <input type="submit" class="btngrp_main" id="btn_start" value="CLICK to continue">
