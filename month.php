@@ -8,7 +8,7 @@ startHTML("Select Month");
 	<br><img src="assets/separator.png"><br><br>
 	<div id="div_options">
 		It is 1848. Your jumping off place for Oregon is Independence, Missouri. You must decide which month to leave Independence.<br><br>
-		<form action="shop.php" method="post">
+		<form action="shop.php?sourcePage=travel.php" method="post">
 			<input type="radio" value="1" name="month" class="btngrp_main" id="btn_main1" checked> March<br>
 			<input type="radio" value="2" name="month" class="btngrp_main" id="btn_main2"> April<br>
 			<input type="radio" value="3" name="month" class="btngrp_main" id="btn_main3"> May<br>

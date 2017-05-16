@@ -31,20 +31,14 @@ startHTML("View Hiscores");
         <br><img src="assets/Separator2.png"><br>
         <p id="p_info1" style="display:inline">
             Your most important resource is the people you have with you. You receive points for each member of your party who arrives safely; you receive more points if they arrive in good health!<br><br>
-            <p class="p_inline">
-                <div id="div_txtblock">Health of Party</div>
-                Good
-                Fair
-                Poor
-                Very Poor
-            </p>
-            <p class="p_inline">
-                <div id="div_txtblock">Points per Person</div><br>
-                500<br>
-                400<br>
-                300<br>
-                200<br>
-            </p>
+            <table>
+                <tr> <th><div id="div_txtblock">Health of Party</div></th> <th>
+                <div id="div_txtblock">Points per Person</div><br></th></tr>
+                <tr> <td>Good</td> <td>500</td> </tr>
+                <tr> <td>Fair</td> <td>400</td> </tr>
+                <tr> <td>Poor</td> <td>300</td> </tr>
+                <tr> <td>Very Poor</td> <td>200</td> </tr>
+            </table>
         </p>
         <p id="p_info2">
             The resources you arrive with will help you get started in the new land. You receive points for each item you bring safely to Oregon.<br>
