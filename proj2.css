@@ -62,10 +62,9 @@ body {
 #div_hidden {
 	align-items: center;
 	display: none;
-	margin: auto;
 	color: white;
-	text-align: left;
-	width: 512px;
+	text-align: center;
+	width: 768px;
 }
 
 #btn_return {
@@ -108,6 +107,7 @@ div#div_txtblock {
 	height: 128px;
 	width: 128px;
 	text-align: center;
+	padding: 10px;
 }
 
 .p_inline {
@@ -121,6 +121,10 @@ button#btn_points {
 	border-width: 5px;
 	border-radius: 5px;
 	padding: 5px;
+}
+
+table#tbl_points_hidden {
+	text-align: left;
 }
 
 /* END OF HISCORES.PHP */
