@@ -25,7 +25,7 @@ else
 	<form action="fish2.php" method="get">
 		<input type = "hidden" name="sourcePage" value="fish2.php">
 		<input type = "hidden" name="sourcePage2" value="<?php echo $back;?>" >
-		<input type="number" name="baitNum">
+		<input type="number" max="<?php echo $bait;?>" min="0" name="baitNum">
 		<input type = "submit" value="Fish">  
 	</form>
 		</form>
