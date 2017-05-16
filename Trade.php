@@ -41,11 +41,11 @@ else
 
 	<form action="Trade2.php">
 		Will you accept the trade?
-		<input type = "hidden" name="itemID" value="<?php echo $item ?>" >
-		<input type = "hidden" name="rewardID" value="<?php echo $reward ?>">
-		<input type = "hidden" name="itemQunt" value="<?php echo $itemAmount ?>" >
-		<input type = "hidden" name="rewardQunt" value="<?php echo $rewardAmount ?>">
-		<input type = "hidden" name="source2" value="<?php echo $_GET["sourcePage"] ?>">
+		<input type = "hidden" name="itemID" value="<?php echo $item; ?>" >
+		<input type = "hidden" name="rewardID" value="<?php echo $reward; ?>">
+		<input type = "hidden" name="itemQunt" value="<?php echo $itemAmount; ?>" >
+		<input type = "hidden" name="rewardQunt" value="<?php echo $rewardAmount; ?>">
+		<input type = "hidden" name="source2" value="<?php echo $_GET["sourcePage"]; ?>">
         <input type = "submit" value="Yes">  
 	</form>
 
