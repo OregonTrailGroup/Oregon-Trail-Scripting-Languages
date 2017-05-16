@@ -43,7 +43,7 @@
 <div id="rest_div" style="display:none;">
 	<form action="" method="get">
 	"How many days of rest?"
-	<input type="number" min="0" max="9" name="restDays" onkeyPress="isEnter(event)">
+	<input type="number" min="0" max="9" id="restDays" onkeyPress="isEnter(event)">
 	<br>
 	<input type="submit" value="Rest" id="userDays">
 	</form>
@@ -114,14 +114,18 @@ To use a ferry means to put your wagon on top of a flat boat that belongs to som
 <script>
 	$(document).ready(function(){
 		
-		//$("input[id="userDays"]").click(function(){
-		//	$
-		//});
+		$("input#userDays").click(function(){
+			var num = $("#restDays").val();
+			//alert(num);
+			$.get('PassTime.php', {restDays: num}, function(data){
+				//alert(data);
+			});
+		});
 		
 		$("button#button_rest").click(function(){
 			$("#rest_div").toggle();
 		});
-		$("button#button_supplies").click(function(){
+		$("#button_supplies").click(function(){
 			$("#supply_div").toggle();
 			$("#common_Buttons").toggle();
 		});
