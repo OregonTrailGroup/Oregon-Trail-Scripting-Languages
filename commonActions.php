@@ -128,7 +128,7 @@
 <li>To use a ferry means to put your wagon on top of a flat boat that belongs to someone else. The owner of the ferry will take your wagon across the river.</li>
 </p>
 <button id="continue_button">Click to continue</button>
-<div/>
+</div>
 
 <script>
 	$(document).ready(function(){
