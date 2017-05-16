@@ -118,6 +118,9 @@ To use a ferry means to put your wagon on top of a flat boat that belongs to som
 			var num = $("#restDays").val();
 			//alert(num);
 			$.get('PassTime.php', {restDays: num}, function(data){
+				if(timePassed){
+					timePassed(data);
+				}
 				//alert(data);
 			});
 		});
