@@ -50,7 +50,7 @@ hr {
 	background-color: red;
 }
 
-button {
+button, input[type="submit"] {
 	background-color: inherit;
 	font-family: inherit;
 	color: white;

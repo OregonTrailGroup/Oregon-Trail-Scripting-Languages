@@ -137,7 +137,7 @@ function gameLoopIteration()
 // Called when the user passes time via CommonActions
 function timePassed(response)
 {
-    $("span#date").text(response.dateString);
+    $("span#date").text(response.date);
     $("span#partyHealth").text(response.partyHealth);
     livingMembers = response.livingMembers;
     $("span#livingMembers").text(livingMembers);

@@ -348,7 +348,7 @@
 			{
 				if($body->_alive)
 				{
-					$this->body->heal($healRate);
+					$body->heal($healRate);
 				}
 			}	
 		}

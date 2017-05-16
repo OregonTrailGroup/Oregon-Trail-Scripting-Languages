@@ -8,6 +8,7 @@
  include "classes.php";
  session_start();
  include "commonUI.php";
+ include "commonActions.php";
 
  startHTML("Traveling the Trail");
  $nextStop = $_SESSION["playerJourney"]->nextLandmark();
@@ -50,7 +51,8 @@
     <p>Died <span id="graveDate"></span></p>
     <button id="dismissGrave">Dismiss</button>
 </div>
-<!-- Call commonActions here -->
+
+<?php showActions(false, true, basename(__FILE__)); ?>
 
 <!-- Revealed div for when your party gets wiped or you're stranded with a broken wagon -->
 <div id="partyDied" style="display: none;">
