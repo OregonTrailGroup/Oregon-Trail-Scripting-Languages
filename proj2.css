@@ -1,6 +1,6 @@
 
 /* START OF COMMONUI.PHP */
-#div_wrapper {
+#div_wrapper, .vertical-layout {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -8,6 +8,10 @@
 }
 
 #div_game {
+	display: flex;
+	position: relative; /* Makes overlays get positioned relative to this container */
+	flex-direction: column;
+	align-items: center;
 	background-color: black;
 	color: white;
 	text-align: center;
@@ -34,6 +38,16 @@
 
 .btngrp_main, .btngrp_options {
 	background-color: black;
+}
+
+input[type="number"] {
+	background-color: inherit;
+	color: inherit;
+	font-family: inherit;
+	width: 100px;
+}
+
+body {
 	color: white;
 	font-family: 'Press Start 2P', cursive;
 }
@@ -112,3 +126,105 @@ button#btn_points {
 }
 
 /* END OF HISCORES.PHP */
+
+td, th {
+	padding: 8px;
+}
+
+td[colspan] {
+	text-align: center;
+}
+
+hr {
+	border: none;
+	height: 7px;
+	width: 90%;
+	background-color: red;
+}
+
+button, input[type="submit"] {
+	background-color: inherit;
+	font-family: inherit;
+	color: white;
+	cursor: pointer;
+	padding: 5px;
+}
+
+div.overlay
+{
+	background-color: inherit;
+	position: absolute;
+	text-align: center;
+	padding: 10px;
+	width: 100%;
+	height: 100%;
+}
+
+table.river
+{
+	width: 75%;
+	height: 75%;
+}
+
+.water
+{
+	background-color: #5cb5fb;
+	text-align: center;
+}
+
+.wagon
+{
+	background-image: url("assets/Wagon.png") !important;
+	background-position: center;
+	background-size: 100%;
+}
+
+.land
+{
+	background-color: brown;
+}
+
+.rock
+{
+	background-image: url("assets/Rock.png");
+	background-position: center;
+	background-size: 100%;
+}
+
+.inline
+{
+	display:inline;
+}
+
+.greenbox
+{
+	background-color: greenyellow;
+	height: 100px;
+	width: 100%;
+}
+
+@keyframes wagonGo
+{
+	0% { transform: translate(0px, 0px) rotate(0deg); }
+	16% { transform: translate(0px, -20px) rotate(0deg); }
+	33% { transform: translate(0px, -20px) rotate(-33deg); }
+	50% { transform: translate(0px, -20px) rotate(33deg); }
+	66% { transform: translate(0px, -20px) rotate(-33deg); }
+	83% { transform: translate(0px, -20px) rotate(0deg); }
+	100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+.animatedWagon
+{
+	animation: wagonGo 4s infinite;
+	transform-origin: center center;
+}
+
+/* Lays elements out horizontally, centers them vertically, then evenly spaces them horizontally */
+div.horizontal-layout
+{
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-around;
+}

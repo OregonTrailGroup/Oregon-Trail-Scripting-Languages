@@ -32,7 +32,7 @@ startHTML($shopTitle);
         </tr>
         <tr>
             <td>2 Oxen - <button id="ox">$<?php echo money_format($moneyFormat, $shop->_yoke); ?></button></td>
-            <td>1 Pound Food - <button id="food">$<?php echo money_format($moneyFormat, $shop->_food); ?></button></td>
+            <td>10 Pounds Food - <button id="food">$<?php echo money_format($moneyFormat, $shop->_food * 10); ?></button></td>
         </tr>
         <tr>
             <td>1 Set Clothes - <button id="clothes">$<?php echo money_format($moneyFormat, $shop->_clothes); ?></button></td>
