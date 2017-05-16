@@ -59,13 +59,30 @@
 	margin: 0 auto;
 }
 
-/* END OF START.PHP */
-/* START OF MONTH.PHP */
-
 input {
 	background-color: black;
 	color: white;
 	font-family: 'Press Start 2P', cursive;
 }
 
-/* END OF MONTH.PHP */
+/* END OF START.PHP */
+/* START OF INFO.PHP */
+
+p#p_info2, p#p_info3, p#p_info4, p#p_info5, p#p_info6, button#btn_info_return {
+	display: none;
+}
+
+div#div_info {
+	align-items: center;
+	margin: auto;
+	color: white;
+	text-align: left;
+	width: 512px;
+}
+
+button#btn_info_continue {
+	/* 512 / 4 makes for a centered button */
+	margin: 0 128;
+}
+
+/* START OF INFO.PHP */

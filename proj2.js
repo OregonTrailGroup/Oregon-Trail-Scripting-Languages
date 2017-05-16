@@ -48,26 +48,35 @@ $(document).ready(function(){
 		}
 	});
 
+	// info
+	$("#btn_info_continue").click(function(){
+		// hides our current p tag then shows the next
+		var ele = "#p_info" + currentPTag;
+		$(ele).toggle();
+		currentPTag = currentPTag + 1;
+		var ele = "#p_info" + currentPTag;
+		$(ele).toggle();
+
+		if (currentPTag >= 6) {
+			$("#btn_info_continue").toggle();
+			$("#btn_info_return").toggle();
+		}
+	});
+
 });
+
+// default to 1
+var currentPTag = 1;
+
+function init_count(curElement) {
+	currentPTag = curElement;
+}
 
 function isEnter(event) {
 	var ENTER_CODE = 13;
 	if (event.keyCode == ENTER_CODE) {
 		return true;
 	}
-}
-
-function loadFile(path, selector) {
-	//snippet inspired by http://stackoverflow.com/questions/6470567/jquery-load-txt-file-and-insert-into-div
-	$(document).ready(function() {
-		$.ajax({
-            url : path,
-            dataType: "text",
-            success : function (data) {
-                $(selector).html(data);
-            }
-        });
-	});
 }
 
 function toggleDivs(toShow, toHide) {

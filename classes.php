@@ -415,7 +415,7 @@
     class Journey
     {
         public $_maxDate = array('January' => 31,
-                          'Febuary' => 28,
+                          'February' => 28,
                           'March' => 31,
                           'April' => 30,
                           'May' => 31,
@@ -426,7 +426,7 @@
                           'October' => 31,
                           'November' => 30,
                           'December' => 31);
-        public $_months = array('January','Febuary','March','April',
+        public $_months = array('January','February','March','April',
                           'May','June','July','August',
                           'September','October','November','December');
 
