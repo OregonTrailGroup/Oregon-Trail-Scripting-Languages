@@ -28,7 +28,7 @@
 	<button class="button_hide" id="button_rest">stop to rest</button><br>
 	<a href="Trade.php?sourcePage=<?php echo $sourcePage; ?>"><button class="button_hide" id="button_trade">attempt to trade</button></a><br>
 	<a href="fish.php?sourcePage=<?php echo $sourcePage; ?>"><button class="button_hide" id="button_fish">fish for food</button></a><br>
-	<a href="Shop.php?sourcePage=<?php echo $sourcePage; ?>"><button class="button_hide_shop" id="button_shop" >buy supplies</button></a><br>
+	<a href="shop.php?sourcePage=<?php echo $sourcePage; ?>"><button class="button_hide_shop" id="button_shop" >buy supplies</button></a><br>
 	<br>
 </div>
 
@@ -78,12 +78,15 @@
 		//update the time session variable/s
 		$("button#userDays").click(function(){
 			var num = $("#restDays").val();
+
 			//ajax for sending the chosen days of rest to PassTime.php
+
 			$.get('PassTime.php', {restDays: num}, function(data){
-				if(timePassed){
+				if(typeof timePassed !== "undefined"){
 					timePassed(data);
 				}
-				//alert(data);
+
+				$("#rest_div").toggle();
 			}, "json");
 			$("#rest_div").toggle();
 		});

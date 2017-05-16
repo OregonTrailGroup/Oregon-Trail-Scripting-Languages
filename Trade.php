@@ -30,6 +30,9 @@ if(($item == 1)||($reward == 1))
 {
 
 		echo "No one wants to trade today.";
+		?>
+		<a href="<?php echo $_GET["sourcePage"]; ?>"><button>Go back</button></a>
+		<?php
 
 }
 else
@@ -49,7 +52,7 @@ else
         <input type = "submit" value="Yes">  
 	</form>
 
-	   <a href = "<?php echo $_GET["sourcePage.php"]?>"> <button>No</button></a>
+	   <a href = "<?php echo $_GET["sourcePage"]?>"> <button>No</button></a>
 
 
 </p>

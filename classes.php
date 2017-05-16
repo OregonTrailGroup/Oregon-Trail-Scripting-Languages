@@ -31,12 +31,12 @@
 		#heals occur at rests
 		public function heal($healRate)
 		{
-			if ($this->health >= 90)
+			if ($this->_health >= 90)
 			{
 				$this->_illness = false;
 				$this->_illnessName = null;
 			}
-			if ($this->health < 100)
+			if ($this->_health < 100)
 			{
 				$this->_health += $healRate;
 			}
@@ -45,7 +45,10 @@
 		#member takes damage when ill or durring event
 		public function takeDamage()
 		{
-			$this->_health -= $damage; 
+			if ($this->_illness)
+			{
+				$this->_health -= $this->_damage; 
+			}
 		}
 
 		#kills member
@@ -241,15 +244,27 @@
 			{
 				if ($member->_alive)
 				{
-					if ($this->_rate >= $this->_supplies->_food)
+					if ($this->_rate <= $this->_supplies->_food)
 					{
 						$this->_supplies->eat($this->_rate);
 					}
 					else
 					{
 						# Party member harmed when they don't eat
-						$member->_health -= 5;
+						$member->_health -= 15;
 					}
+				}
+			}
+		}
+
+		# Applies sickness damage to the party
+		public function applyDamage()
+		{
+			foreach ($this->_members as $member)
+			{
+				if ($member->_alive)
+				{
+					$member->takeDamage();
 				}
 			}
 		}
@@ -258,6 +273,7 @@
 		public function killCheck()
 		{
 			$checkLeader = false;
+			$diedList = array();
 			foreach($this->_members as $body)
 			{
 				if($body->_alive)
@@ -266,26 +282,26 @@
 					{
 						$checkLeader = true;
 						$body->_alive = false;
+						$body->_health = 0;
 						$this->_livingMembers-=1;
-
+						array_push($diedList, $body->_name);
 					}
 				}
 			}
 			if ($checkLeader)
 			{
 				foreach($this->_members as $body)
-			{
-				if($body->_alive)
 				{
-					$this->_leader = $body->_name;
-					break;
+					if($body->_alive)
+					{
+						$this->_leader = $body->_name;
+						break;
+					}
 				}
 			}
 
-			#code for when all members are dead
-			#ends game
+			return $diedList;
 		}
-	}
 
 		#averages health and assigns a rating
 		public function health()
@@ -332,7 +348,7 @@
 			{
 				if($body->_alive)
 				{
-					$this->body->heal($healRate);
+					$body->heal($healRate);
 				}
 			}	
 		}
@@ -460,12 +476,10 @@
 		public function __construct($date, $month)
 		{
 			$this->_date = $date;
-			$this->_month = $month;
+			$this->_month = $this->_months[$month - 1];
 			$this->_speed = 20;
 			$this->_distance = 0;
 			$this->_weather = "sunny";
-			$_distance = 0;
-			$_weather = "sunny";
 			$this->_locations = array( new River("Kansas River Crossing", 102, 
 								"assets/river1.jpg", 2, TRUE),
 					      new River("Big Blue River Crossing", 185, 
@@ -503,13 +517,13 @@
 		}
 
 		# Advances the party via their speed
-		public function progress()
+		public function progress($slowfactor = 1.0)
 		{
 			$nextLandmark = $this->nextLandmark();
-			$this->_distance += $this->_speed;
-			if ($this->_distance > $nextLandmark)
+			$this->_distance += $this->_speed / $slowfactor;
+			if ($this->_distance > $this->_locations[$nextLandmark]->_distance)
 			{
-				$this->_distance = $nextLandmark;
+				$this->_distance = $this->_locations[$nextLandmark]->_distance;
 			}
 
 			return $this->_distance;
@@ -574,6 +588,7 @@
 # Found on the PHP website
 function erase_session()
 {
+
 	// Initialize the session.
 	// If you are using session_name("something"), don't forget it now!
 	session_start();

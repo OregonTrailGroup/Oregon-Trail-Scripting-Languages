@@ -19,8 +19,8 @@ try
     $qty = intval($_GET["itemQty"]);
     $price = floatval($_GET["itemPrice"]);
 
-    $_SESSION["playerParty"]->_supplies->setItem($id, $qty);
-    $_SESSION["playerParty"]->_supplies->_money -= $price;
+    $_SESSION["playParty"]->_supplies->setItem($id, $qty);
+    $_SESSION["playParty"]->_supplies->_money -= $price;
 
     echo json_encode(array("success" => TRUE));
 }
