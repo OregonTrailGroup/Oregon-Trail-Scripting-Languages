@@ -38,10 +38,10 @@ $(document).ready(function () {
     $("button#food").click(function() {
         if (food[1] <= money)
         {
-            food[0]++;
-            money -= food[1];
+            food[0] += 10;
+            money -= food[1] * 10;
             updateQuantities();
-            buyItem(0, 1, food[1]);
+            buyItem(0, 10, food[1]);
         }
         else
         {
