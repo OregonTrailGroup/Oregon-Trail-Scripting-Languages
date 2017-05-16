@@ -37,7 +37,7 @@
 	"How many days of rest?"
 	<input type="number" min="0" max="9" id="restDays" onkeyPress="isEnter(event)">
 	<br>
-	<button type="submit" id="userDays">Rest</Button>
+	<button id="userDays">Rest</Button>
 	</form>
 </div>
 
@@ -57,14 +57,14 @@
 	money left<br>
 	</p>
 	<p style="display:inline-block">
-	<?php echo $_SESSION["playParty"]->_supplies->_oxen ?><br>
-	<?php echo $_SESSION["playParty"]->_supplies->_clothes ?><br>
-	<?php echo $_SESSION["playParty"]->_supplies->_bait ?><br>
-	<?php echo $_SESSION["playParty"]->_supplies->_wagonWheels ?><br>
-	<?php echo $_SESSION["playParty"]->_supplies->_wagonAxle ?><br>
-	<?php echo $_SESSION["playParty"]->_supplies->_wagonTongue ?><br>
-	<?php echo $_SESSION["playParty"]->_supplies->_food ?><br>
-	<?php echo $_SESSION["playParty"]->_supplies->_money ?><br>
+	<span><?php echo $_SESSION["playParty"]->_supplies->_oxen ?></span><br>
+	<span><?php echo $_SESSION["playParty"]->_supplies->_clothes ?></span><br>
+	<span><?php echo $_SESSION["playParty"]->_supplies->_bait ?></span><br>
+	<span><?php echo $_SESSION["playParty"]->_supplies->_wagonWheels ?></span><br>
+	<span><?php echo $_SESSION["playParty"]->_supplies->_wagonAxle ?></span><br>
+	<span><?php echo $_SESSION["playParty"]->_supplies->_wagonTongue ?></span><br>
+	<span><?php echo $_SESSION["playParty"]->_supplies->_food ?></span><br>
+	<span><?php echo $_SESSION["playParty"]->_supplies->_money ?></span><br>
 	</p>
 	<br><button id="return_button">Return to menu</button>
 	
