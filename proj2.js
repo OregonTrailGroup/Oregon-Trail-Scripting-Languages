@@ -23,39 +23,6 @@ $(document).ready(function(){
 
 	});
 
-	$("input[id='btn_start']").click(function(){
-		/*
-		var radios = document.getElementsByClassName("radio_start");
-		var valid_radio = null;
-		var NUM_PARTY_MEMBERS = 5;
-		for (i = 0; i < radios.length && valid_radio == null; i++) { 
-    		if (radios[i].checked == true) {
-    			valid_radio = radios[i];
-    		}
-		}
-		alert(valid_ratio);
-		var names_arr = [];
-		for (i = 0; i < NUM_PARTY_MEMBERS; i++) {
-			var ele = "txtbox_" + i;
-			var name = document.getElementById(ele).value;
-			names_arr.push(name);
-		}
-		console.log("1: " + valid_radio);
-		alert("test");
-		console.log("2: " + names_arr);
-		*/
-		var job_val = $("input[type='radio']:checked").val();
-		var name1_val = $("input[name='party_mem_1']").val();
-		var name2_val = $("input[name='party_mem_2']").val();
-		var name3_val = $("input[name='party_mem_3']").val();
-		var name4_val = $("input[name='party_mem_4']").val();
-		var name5_val = $("input[name='party_mem_5']").val();
-		$.post("setvars.php", { job: job_val, name1: name1_val, name2: name2_val, name3: name3_val, name4: name4_val, name5: name5_val }, function(data) {
-			sleep(5);
-		});
-
-	});
-
 	// options
 	$(".btngrp_options").click(function(){
 		var val = $(this).text();
