@@ -5,7 +5,7 @@ include 'setvars.php';
 include 'commonUI.php';
 startHTML("Select Month");
 ?>
-	<br><img src="assets/separator.png"><br><br>
+	<br><img src="assets/Separator.png"><br><br>
 	<div id="div_options">
 		It is 1848. Your jumping off place for Oregon is Independence, Missouri. You must decide which month to leave Independence.<br><br>
 		<form action="shop.php?sourcePage=travel.php" method="post">
@@ -28,7 +28,7 @@ startHTML("Select Month");
 		</p>
 		<button class="btngrp_main" id="btn_return" onclick="toggleDivs('div_options', 'div_hidden')">CLICK to continue</button>
 	</div>
-	<br><img src="assets/separator.png"><br>
+	<br><img src="assets/Separator.png"><br>
 
 <?php
 endHTML();

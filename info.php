@@ -4,7 +4,7 @@ startHTML("The Oregon Trail Game")
 ?>
     <script>init_count(1);</script>
 	<br><img src="assets/title.png"><br>
-	<br><img src="assets/separator.png"><br><br>
+	<br><img src="assets/Separator.png"><br><br>
 	<div id="div_info">
         <p id="p_info1">
             Try taking a journey be covered wagon across 2000 miles of plains, rivers, and mountains. Try! On the plains, will you slosh your oxen through mud and water-filled ruts or will you plod through dust six inches deep?
@@ -27,7 +27,7 @@ startHTML("The Oregon Trail Game")
         <button id="btn_info_continue" class="btngrp_main">CLICK to continue</button>
 	</div>
     <a href="index.php"><button id="btn_info_return" class="btngrp_main">Return to Main Menu</button></a>
-	<br><img src="assets/separator.png"><br>
+	<br><img src="assets/Separator.png"><br>
 
 <?php
 endHTML();
