@@ -89,42 +89,109 @@
 
 		public function setItem($ID, $amount)
 		{
+			$changeAmt = $amount;
+
 			switch ($ID)
 			{ 
 			case 0:
-				$this->_food += $amount;
+				# Prevents amounts from going below 0
+				if ( -$amount <= $this->_food)
+				{
+					$this->_food += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_food;
+					$this->_food = 0;
+				}
 				break;
 				
 			case 1:
-				$this->_money += $amount;
+                if ( -$amount  <= $this->_money)
+				{
+					$this->_money += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_money;
+					$this->_money = 0;
+				}
 				break;
 
 			case 2:
-				$this->_bait += $amount;
+                if ( -$amount  <= $this->_bait)
+				{
+					$this->_bait += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_bait;
+					$this->_bait = 0;
+				}
 				break;
 
 			case 3:
-				$this->_clothes += $amount;
+				if ( -$amount  <= $this->_clothes)
+				{
+					$this->_clothes += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_clothes;
+					$this->_clothes = 0;
+				}
 				break;
 
 			case 4:
-				$this->_wagonWheels += $amount;
+				if ( -$amount  <= $this->_wagonWheels)
+				{
+					$this->_wagonWheels += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_wagonWheels;
+					$this->_wagonWheels = 0;
+				}
 				break;
 
 			case 5:
-				$this->_wagonAxle += $amount;
+				if ( -$amount  <= $this->_wagonAxle)
+				{
+					$this->_wagonAxle += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_wagonAxle;
+					$this->_wagonAxle = 0;
+				}
 				break;
 
 			case 6:
-				$this->_wagonTongue += $amount;
+                if ( -$amount  <= $this->_wagonTongue)
+				{
+					$this->_wagonTongue += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_wagonTongue;
+					$this->_wagonTongue = 0;
+				}
 				break;
 
 			case 7:
-				$this->_oxen += $amount;
+                if ( -$amount  <= $this->_oxen)
+				{
+					$this->_oxen += $amount;
+				}
+				else
+				{
+					$changeAmt = $this->_oxen;
+					$this->_oxen = 0;
+				}
 				break;
 			}
 
-
+			return $changeAmt;
 		}
 
 	}
@@ -136,6 +203,7 @@
 		public $_health = "Good";	#general health of the party
 		public $_supplies;	#supplies class instant
 		public $_livingMembers = 5; #licing members of the party
+		public $_leader;
 		public $_rate = 3; #rate at which food is eaten
 		public $_job;
 		public $_jobVal = [["empty",0],["Banker", 1600.00], 
@@ -150,6 +218,7 @@
 			$this->_members[3] = new PartyMember($names[3]);
 			$this->_members[4] = new PartyMember($names[4]);
 
+			$this->_leader = $names[0];
 			#supplies made by passing in starting money
 			$this->_job = $job;
 
@@ -168,27 +237,55 @@
 		#food is reduced based on living party members and ration rate
 		public function eat()
 		{
-			$this->_supplies->eat($this->_rate * $this->_livingMembers);
+			foreach ($this->_members as $member)
+			{
+				if ($member->_alive)
+				{
+					if ($this->_rate >= $this->_supplies->_food)
+					{
+						$this->_supplies->eat($this->_rate);
+					}
+					else
+					{
+						# Party member harmed when they don't eat
+						$member->_health -= 5;
+					}
+				}
+			}
 		}
 
 		#checks if any members can be killed (has 0 health)
 		public function killCheck()
 		{
+			$checkLeader = false;
 			foreach($this->_members as $body)
 			{
 				if($body->_alive)
 				{
 					if($body->_health <= 0)
 					{
+						$checkLeader = true;
 						$body->_alive = false;
 						$this->_livingMembers-=1;
+
 					}
+				}
+			}
+			if ($checkLeader)
+			{
+				foreach($this->_members as $body)
+			{
+				if($body->_alive)
+				{
+					$this->_leader = $body->_name;
+					break;
 				}
 			}
 
 			#code for when all members are dead
 			#ends game
 		}
+	}
 
 		#averages health and assigns a rating
 		public function health()
@@ -276,12 +373,15 @@
 		public $_shopIndex; # if this has a shop, the index of the shop
 		public $_name; #name of the landmark
 		public $_distance;	#distance along the trail
+		public $_image;
 
-		public function __construct($hasShop, $name, $distance)
+		public function __construct($hasShop, $name, $distance, $image)
 		{
 			$this->_hasShop = $hasShop;
 			$this->_name = $name;
 			$this->_distance = $distance;
+			$this->_image = $image;
+
 			
 			if ($this->_hasShop == TRUE)
 			{
@@ -303,10 +403,10 @@
 		public $_depth; #depth of the river, invluences fording and rafting
 		public $_hasFerry; #wheter a ferry is avalable or not
 
-		public function __construct($name, $distance, $depth, $hasFerry)
+		public function __construct($name, $distance, $image, $depth, $hasFerry)
 		{
 			#notice the super ensures there is no shop avalable
-			parent::__construct(false, $name, $distance);
+			parent::__construct(false, $name, $distance, $image);
 
 			$this->_depth = $depth;
 			$this->_hasFerry = $hasFerry;
@@ -354,45 +454,65 @@
 		public $_date; #current date, constantlly increments 
 		public $_month;
 		public $_distance; #distance traveled
+		public $_speed; # Travel rate, either 20, 30, or 40 depending on pace
 		public $_weather; #current weather, effects events
 		public $_locations; #array of all landmarks
 		public function __construct($date, $month)
 		{
 			$this->_date = $date;
 			$this->_month = $month;
-
+			$this->_speed = 20;
 			$this->_distance = 0;
 			$this->_weather = "sunny";
 			$_distance = 0;
 			$_weather = "sunny";
-			$this->_locations = array( new River("Kansas River Crossing", 102, 2, TRUE),
-					      new River("Big Blue River Crossing", 185, 2.3, FALSE),
-					      new Landmark(TRUE, "Fort Kearney", 304),
-					      new Landmark(FALSE, "Chimney Rock", 554),
-						  new Landmark(TRUE, "Fort Laramie", 640),
-						  new Landmark(FALSE, "Independence Rock", 830),
-						  new Landmark(FALSE, "South Pass", 932),
-						  new River("Green River Crossing", 989, 2.6, TRUE),
-						  new Landmark(FALSE, "Soda Springs", 1133),
-						  new Landmark(TRUE, "Fort Hall", 1190),
-						  new River("Snake River Crossing", 1372, 3.0, FALSE),
-						  new Landmark(TRUE, "Fort Boise", 1486),
-						  new Landmark(FALSE, "Blue Mountains", 1646),
-						  new Landmark(FALSE, "The Dalles", 1771),
-						  new Landmark(TRUE, "Williamette Valley", 1871),
-						  new Landmark(FALSE, "Oregon City", 2000));
+			$this->_locations = array( new River("Kansas River Crossing", 102, 
+								"assets/river1.jpg", 2, TRUE),
+					      new River("Big Blue River Crossing", 185, 
+					      		"assets/river2.jpg", 2.3, FALSE),
+					      new Landmark(TRUE, "Fort Kearney", 304, "assets/land1.jpg"),
+					      new Landmark(FALSE, "Chimney Rock", 554, "assets/land2.jpg"),
+						  new Landmark(TRUE, "Fort Laramie", 640, "assets/land3.jpg"),
+						  new Landmark(FALSE, "Independence Rock", 830, "assets/land4.jpg"),
+						  new Landmark(FALSE, "South Pass", 932, "assets/land5.jpg"),
+						  new River("Green River Crossing", 989, 
+						  		"assets/river3.jpg",2.6, TRUE),
+						  new Landmark(FALSE, "Soda Springs", 1133, "assets/land6.jpg"),
+						  new Landmark(TRUE, "Fort Hall", 1190, "assets/land7.jpg"),
+						  new River("Snake River Crossing", 1372, 
+						  	"assets/river4.jpg", 3.0, FALSE),
+						  new Landmark(TRUE, "Fort Boise", 1486, "assets/land8.jpg"),
+						  new Landmark(FALSE, "Blue Mountains", 1646, "assets/land9.jpg"),
+						  new Landmark(FALSE, "The Dalles", 1771, "assets/land10.jpg"),
+						  new Landmark(TRUE, "Williamette Valley", 1871, "assets/land11.jpg"),
+						  new Landmark(FALSE, "Oregon City", 2000, null));
 		}
 
 		public function nextLandmark()
 		{
 			#searches the array for the next highest location based on
 			#current location
+			$count = 0;
 			foreach ($this->_locations as $local) {
-				if($this->_distance < $local->$_distance)
+				if($this->_distance < $local->_distance)
 					{
-						return $local;
-					}			
+						return $count;
+					}
+					$count +=1;
 				}
+		}
+
+		# Advances the party via their speed
+		public function progress()
+		{
+			$nextLandmark = $this->nextLandmark();
+			$this->_distance += $this->_speed;
+			if ($this->_distance > $nextLandmark)
+			{
+				$this->_distance = $nextLandmark;
+			}
+
+			return $this->_distance;
 		}
 
 		#increments the day
