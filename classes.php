@@ -6,7 +6,7 @@
     {
         public $_alive = true; #alive or dead
         public $_name;         #party member's first name
-        public $_health = 100; #health, maximum 100, death at 0, 
+        public $_health = 100; #health, maximum 100, death at 0,
                                 #illness cured 90 up,
                                 #illness possible at 75 bellow
 
@@ -17,41 +17,41 @@
         #constructor
         public function __construct($name)
         {
-            $_name = $name;
+            $this->_name = $name;
         }
 
         #induces injury or illness
         public function catchCold($name, $damage)
         {
-            $_illness = true;
-            $_illnessName = $name;
-            $_damage = $damage;
+            $this->_illness = true;
+            $this->_illnessName = $name;
+            $this->_damage = $damage;
         }
 
         #heals occur at rests
         public function heal($healRate)
         {
-            if ($health >= 90)
+            if ($this->health >= 90)
             {
-                $_illness = false;
-                $_illnessName = null;
+                $this->_illness = false;
+                $this->_illnessName = null;
             }
-            if ($health < 100)
+            if ($this->health < 100)
             {
-                $_health += $healRate;
+                $this->_health += $healRate;
             }
         }
 
         #member takes damage when ill or durring event
         public function takeDamage()
         {
-            $_health -= $damage; 
+            $this->_health -= $damage; 
         }
 
         #kills member
-        public function _die()
+        public function killMember()
         {
-            $_alive = false;
+            $this->_alive = false;
         }
     }
 
@@ -72,59 +72,126 @@
 
         public function __construct($jobCash)
         {
-            $_food = 0;
-            $_money = $jobCash; #Job
-            $_bait = 0;
-            $_clothes = 0;
-            $_wagonAxle = 0;
-            $_wagonWheels = 0;
-            $_wagonTongue = 0;
-
+            $this->_food = 0;
+            $this->_money = $jobCash; #Job
+            $this->_bait = 0;
+            $this->_clothes = 0;
+            $this->_wagonAxle = 0;
+            $this->_wagonWheels = 0;
+            $this->_wagonTongue = 0;
+            $this->_oxen = 0;
         }
 
         public function eat($rate)
         {
-            $_food -= $rate;
+            $this->_food -= $rate;
         }
 
         public function setItem($ID, $amount)
         {
+            $changeAmt = $amount;
+
             switch ($ID)
             { 
             case 0:
-                $_food += $amount;
+                # Prevents amounts from going below 0
+                if ( -$amount <= $this->_food)
+                {
+                    $this->_food += $amount;
+                }
+                else
+                {
+                    $changeAmt = $this->_food;
+                    $this->_food = 0;
+                }
                 break;
                 
             case 1:
-                $_money += $amount;
+                if ( -$amount  <= $this->_money)
+                {
+                    $this->_money += $amount;
+                }
+                else
+                {
+                    $changeAmt = $this->_money;
+                    $this->_money = 0;
+                }
                 break;
 
             case 2:
-                $_bait += $amount;
+                if ( -$amount  <= $this->_bait)
+                {
+                    $this->_bait += $amount;
+                }
+                else
+                {
+                    $changeAmt = $this->_bait;
+                    $this->_bait = 0;
+                }
                 break;
 
             case 3:
-                $_clothes += $amount;
+                if ( -$amount  <= $this->_clothes)
+                {
+                    $this->_clothes += $amount;
+                }
+                else
+                {
+                    $changeAmt = $this->_clothes;
+                    $this->_clothes = 0;
+                }
                 break;
 
             case 4:
-                $_wagonWheels += $amount;
+                if ( -$amount  <= $this->_wagonWheels)
+                {
+                    $this->_wagonWheels += $amount;
+                }
+                else
+                {
+                    $changeAmt = $this->_wagonWheels;
+                    $this->_wagonWheels = 0;
+                }
                 break;
 
             case 5:
-                $_wagonAxle += $amount;
+                if ( -$amount  <= $this->_wagonAxle)
+                {
+                    $this->_wagonAxle += $amount;
+                }
+                else
+                {
+                    $changeAmt = $this->_wagonAxle;
+                    $this->_wagonAxle = 0;
+                }
                 break;
 
             case 6:
-                $_wagonTongue += $amount;
+                if ( -$amount  <= $this->_wagonTongue)
+                {
+                    $this->_wagonTongue += $amount;
+                }
+                else
+                {
+                    $changeAmt = $this->_wagonTongue;
+                    $this->_wagonTongue = 0;
+                }
                 break;
 
             case 7:
-                $_oxen += $amount;
+                if ( -$amount  <= $this->_oxen)
+                {
+                    $this->_oxen += $amount;
+                }
+                else
+                {
+                    $changeAmt = $this->_oxen;
+                    $this->_oxen = 0;
+                }
                 break;
             }
 
-
+            return $changeAmt;
         }
 
     }
@@ -134,48 +201,66 @@
     {
         public $_members = []; #array containing all party members
         public $_health = "Good";   #general health of the party
-        public $_supplies;  #supplies class instant
+        public $_supplies;  #supplies class instance
         public $_livingMembers = 5; #licing members of the party
         public $_rate = 3; #rate at which food is eaten
+        public $_job;
+        public $_jobVal = [["empty", 0.00],["Banker", 1600.00], 
+                            ["Carpenter", 800.00],["Farmer", 400.00]];
 
-        public function __construct($names, $jobCash)
+        public function __construct($names, $job)
         {
             # names are given to constructor and made into party members
-            $_members[0] = new PartyMember($names[0]);
-            $_members[1] = new PartyMember($names[1]);
-            $_members[2] = new PartyMember($names[2]);
-            $_members[3] = new PartyMember($names[3]);
-            $_members[4] = new PartyMember($names[4]);
+            $this->_members[0] = new PartyMember($names[0]);
+            $this->_members[1] = new PartyMember($names[1]);
+            $this->_members[2] = new PartyMember($names[2]);
+            $this->_members[3] = new PartyMember($names[3]);
+            $this->_members[4] = new PartyMember($names[4]);
 
             #supplies made by passing in starting money
-            $_supplies = new Supplies($jobCash);
+            $this->_job = $job;
 
+            $this->_supplies = new Supplies($this->_jobVal[$job][1]);
 
         }
 
         #set ration rate
         public function setRate($newRate)
         {
-            $_rate = $newRate;
+            $this->_rate = $newRate;
         }
 
         #food is reduced based on living party members and ration rate
         public function eat()
         {
-            $_supplies->eat($_rate * $_livingMembers);
+            foreach ($this->_members as $member)
+            {
+                if ($member->_alive)
+                {
+                    if ($this->_rate >= $this->_supplies->_food)
+                    {
+                        $this->_supplies->eat($this->_rate);
+                    }
+                    else
+                    {
+                        # Party member harmed when they don't eat
+                        $member->_health -= 5;
+                    }
+                }
+            }
         }
 
         #checks if any members can be killed (has 0 health)
         public function killCheck()
         {
-            foreach($_members as $body)
+            foreach($this->_members as $body)
             {
-                if($body->$_alive)
+                if($body->_alive)
                 {
-                    if($body->$health <= 0)
+                    if($body->_health <= 0)
                     {
-                        $body->$_alive = false;
-                        $_livingMembers-=1;
+                        $body->_alive = false;
+                        $this->_livingMembers-=1;
                     }
                 }
             }
@@ -189,35 +274,35 @@
         {
             $sum = 0;
             $average = 0;
-            foreach ($_members as $body) {
-                if($body->$_alive)
+            foreach ($this->_members as $body) {
+                if($body->_alive)
                 {
-                    $_sum += $body;
+                    $sum += $body->_health;
                 }
             }
 
-            $average = $sum / $_livingMembers;
+            $average = $sum / $this->_livingMembers;
 
 
             if($average <= 0)
             {
-                $_health = "Game Over";
+                $this->_health = "Game Over";
             }
             else if($average >= 75)
             {
-                $_health = "Good";
+                $this->_health = "Good";
             }
             else if($average > 50)
             {
-                $_health = "Fair";
+                $this->_health = "Fair";
             }
             else if($average > 25)
             {
-                $_health = "Poor";
+                $this->_health = "Poor";
             }
             else 
             {
-                $_health = "Bad";
+                $this->_health = "Bad";
             }
 
         }
@@ -225,11 +310,11 @@
         #rest function that calls each member's heal function
         public function rest($healRate)
         {
-            foreach ($_members as $body) 
+            foreach ($this->_members as $body) 
             {
-                if($body->$_alive)
+                if($body->_alive)
                 {
-                    $body->heal($healRate);
+                    $this->body->heal($healRate);
                 }
             }   
         }
@@ -252,11 +337,11 @@
         {
         #costs are set based on a base cost and increase 
         #with each new location at a set rate
-        $_clothes = 10 + 2.5 * $local;
-        $_food  = .2 + .1 * $local;
-        $_bait  =  2 + 2.5 * $local;
-        $_parts  = 10 + 2.5 * $local;
-        $_yoke  = 40 + 5 * $local;
+        $this->_clothes = 10 + 2.5 * $local;
+        $this->_food  = .2 + .1 * $local;
+        $this->_bait  =  2 + 2.5 * $local;
+        $this->_parts  = 10 + 2.5 * $local;
+        $this->_yoke  = 40 + 5 * $local;
         }
     }
 
@@ -265,16 +350,27 @@
     */
     class Landmark
     {
+        public static $_numShops = 0;
         public $_hasShop; #has a shop or not
+        public $_shopIndex; # if this has a shop, the index of the shop
         public $_name; #name of the landmark
         public $_distance;  #distance along the trail
 
         public function __construct($hasShop, $name, $distance)
         {
-            $_hasShop = $hasShop;
-            $_name = $name;
-            $_distance = $distance;
-
+            $this->_hasShop = $hasShop;
+            $this->_name = $name;
+            $this->_distance = $distance;
+            
+            if ($this->_hasShop == TRUE)
+            {
+                self::$_numShops++;
+                $this->_shopIndex = self::$_numShops;
+            }
+            else
+            {
+                $this->_shopIndex = -1;
+            }
         }
     }
 
@@ -291,8 +387,8 @@
             #notice the super ensures there is no shop avalable
             parent::__construct(false, $name, $distance);
 
-            $_depth = $depth;
-            $_hasFerry = $hasFerry;
+            $this->_depth = $depth;
+            $this->_hasFerry = $hasFerry;
         }
 
         #states: return 0 for no chance of bad event
@@ -301,11 +397,11 @@
         #chance based on river depth
         public function ford()
         {
-            if ($_depth <= 2.5)
+            if ($this->_depth <= 2.5)
             {
                 return 0;
             }
-            elseif ($_depth < 3.0) {
+            elseif ($this->_depth < 3.0) {
                 return 1;
             }
             else{return 2;}
@@ -337,50 +433,138 @@
         public $_date; #current date, constantlly increments 
         public $_month;
         public $_distance; #distance traveled
+        public $_speed; # Travel rate, either 20, 30, or 40 depending on pace
         public $_weather; #current weather, effects events
         public $_locations; #array of all landmarks
-        public function __construct($date, $month, $locations)
+        public function __construct($date, $month)
         {
-            $_date = $date;
-            $_month = $_month;
-
-            $_distance = 0;
-            $_weather = "sunny";
-            $_locations =  $location;
-
-            # code...
+            $this->_date = $date;
+            $this->_month = $month;
+            $this->_speed = 20;
+            $this->_distance = 0;
+            $this->_weather = "sunny";
+            $this->_locations = array( new River("Kansas River Crossing", 102, 2, TRUE),
+                          new River("Big Blue River Crossing", 185, 2.3, FALSE),
+                          new Landmark(TRUE, "Fort Kearney", 304),
+                          new Landmark(FALSE, "Chimney Rock", 554),
+                          new Landmark(TRUE, "Fort Laramie", 640),
+                          new Landmark(FALSE, "Independence Rock", 830),
+                          new Landmark(FALSE, "South Pass", 932),
+                          new River("Green River Crossing", 989, 2.6, TRUE),
+                          new Landmark(FALSE, "Soda Springs", 1133),
+                          new Landmark(TRUE, "Fort Hall", 1190),
+                          new River("Snake River Crossing", 1372, 3.0, FALSE),
+                          new Landmark(TRUE, "Fort Boise", 1486),
+                          new Landmark(FALSE, "Blue Mountains", 1646),
+                          new Landmark(FALSE, "The Dalles", 1771),
+                          new Landmark(TRUE, "Williamette Valley", 1871),
+                          new Landmark(FALSE, "Oregon City", 2000));
         }
 
         public function nextLandmark()
         {
             #searches the array for the next highest location based on
             #current location
-            foreach ($_locations as $local) {
-                if($_distance < $local->$_distance)
+            foreach ($this->_locations as $local) {
+                if($this->_distance < $local->$_distance)
                     {
                         return $local;
                     }           
                 }
         }
 
+        # Advances the party via their speed
+        public function progress()
+        {
+            $nextLandmark = $this->nextLandmark();
+            $this->_distance += $this->_speed;
+            if ($this->_distance > $nextLandmark)
+            {
+                $this->_distance = $nextLandmark;
+            }
+
+            return $this->_distance;
+        }
+
         #increments the day
         public function incrementDay()
         {
             #increase day
-            $_date += 1;
+            $this->_date += 1;
             #checks if Day is higher then max days for the month
-            if($_date > $_maxDate[$_month])
+            if($this->_date > $this->_maxDate[$this->_month])
             {
                 #resset date to 1, move to next month
-                $_date = 1;
-                $monthI = array_search($_month, $_months) + 1;
+                $this->_date = 1;
+                $monthI = array_search($this->_month, $this->_months) + 1;
 
                 #loop month back to 0
                 if($monthI > 11){$monthI = 0;}
 
-                $_month = $_months[$monthI];
+                $this->_month = $this->_months[$monthI];
+            }
+        }
+
+        # Binary searches the locations array for a specified landmark given a distance
+        # Gets returned in the format [index, object] or null if nothing was found
+        public function getLandmark($distance)
+        {
+            $hi = count($this->_locations) - 1;
+            $lo = 0;
+
+            while ($lo != $hi)
+            {
+                $mid = floor(($hi + $lo) / 2);
+
+                if ($this->_locations[$mid]->_distance == $distance)
+                {
+                    return array($mid, $this->_locations[$mid]);
+                }
+                else if ($distance < $this->_locations[$mid]->_distance)
+                {
+                    $hi = $mid - 1;
+                }
+                else if ($distance > $this->_locations[$mid]->_distance)
+                {
+                    $lo = $mid + 1;
+                }
+            }
+
+            // Check a size-1 partition just in case
+            if ($this->_locations[$hi]->_distance == $distance)
+            {
+                return array( $hi, $this->_locations[$hi] );
+            }
+            else
+            {
+                return null;
             }
         }
     }
 
-?>
+# Found on the PHP website
+function erase_session()
+{
+    // Initialize the session.
+    // If you are using session_name("something"), don't forget it now!
+    session_start();
+
+    // Unset all of the session variables.
+    $_SESSION = array();
+
+    // If it's desired to kill the session, also delete the session cookie.
+    // Note: This will destroy the session, and not just the session data!
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
+    }
+
+    // Finally, destroy the session.
+    session_destroy();
+}
+
+# Since this is a pure PHP file, it's best practice to leave the end tag off
+# to avoid extraneous whitespace issues
