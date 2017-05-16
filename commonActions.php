@@ -33,12 +33,10 @@
 </div>
 
 <div id="rest_div" style="display:none;">
-	<form action="" method="get">
 	"How many days of rest?"
 	<input type="number" min="0" max="9" id="restDays" onkeyPress="isEnter(event)">
 	<br>
 	<button id="userDays">Rest</Button>
-	</form>
 </div>
 
 <div id="supply_div" style="display:none;">
