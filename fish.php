@@ -18,8 +18,8 @@ else
 {
 	?>
 		<p>Set the amount of Bait to Fish for Food.<br>
-		More Bait will yeild more lbs of food<br>
-		<?php echo $bait;?>
+		More Bait will yeild more lbs of food<br><br>
+		Bait: <?php echo $bait;?>
 	
 		</p>
 	<form action="fish2.php" method="get">
