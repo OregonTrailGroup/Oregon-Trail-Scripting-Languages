@@ -1,6 +1,6 @@
 <?php
 	function showActions($hasShop, $initiallyHidden, $sourcePage){
-		//$hasShop = true;
+		//function called by utside files for showing the main, in-game menu
 		if(!$hasShop || $initiallyHidden){
 			?>
 			<style>
@@ -22,7 +22,7 @@
 ?>
 
 <div id="common_Buttons">
-	<!-- regular options as specified in the issue -->
+	<!-- regular options as shown in the game -->
 	<button class="button_hide" id="button_supplies">check supplies</button><br>
 	<a href="Map.php?sourcePage=<?php echo $sourcePage; ?>"><button class="button_hide" id="button_map">look at map</button></a><br>
 	<button class="button_hide" id="button_rest">stop to rest</button><br>
@@ -33,6 +33,7 @@
 </div>
 
 <div id="rest_div" style="display:none;">
+	<!-- div shown when user wants to rest -->
 	"How many days of rest?"
 	<input type="number" min="0" max="9" id="restDays" onkeyPress="isEnter(event)">
 	<br>
@@ -42,7 +43,7 @@
 <div id="supply_div" style="display:none;">
 	<!-- check session vars to display supplies -->
 	<h3>Your Supplies:</h3>
-	
+	<!-- text, so that the number have meaning -->
 	<p style="display:inline-block">
 	oxen<br>
 	sets of clothing<br>
@@ -53,6 +54,8 @@
 	pounds of food<br>
 	money left<br>
 	</p>
+	<!-- spans for direct modification outside this file -->
+	<!-- accesses the session variables to show the user their supplies -->
 	<p style="display:inline-block">
 	<span id="oxenSpan"><?php echo $_SESSION["playParty"]->_supplies->_oxen ?></span><br>
 	<span id="clotSpan"><?php echo $_SESSION["playParty"]->_supplies->_clothes ?></span><br>
@@ -69,23 +72,27 @@
 
 <script>
 	$(document).ready(function(){
-		//function called by travel when the player stopsand asks for the menu
+		//functions called by buttons in the main menu options
 		
-		//
+		//hides the rest days div and sends the days to PassTime.php to 
+		//update the time session variable/s
 		$("button#userDays").click(function(){
 			var num = $("#restDays").val();
-			//alert(num);
+			//ajax for sending the chosen days of rest to PassTime.php
 			$.get('PassTime.php', {restDays: num}, function(data){
 				if(timePassed){
 					timePassed(data);
 				}
 				//alert(data);
 			}, "json");
+			$("#rest_div").toggle();
 		});
-		
+		//shows the rest days div
 		$("button#button_rest").click(function(){
 			$("#rest_div").toggle();
 		});
+		
+		//shows and hides the players supplies
 		$("#button_supplies").click(function(){
 			$("#supply_div").toggle();
 			$("#common_Buttons").toggle();
