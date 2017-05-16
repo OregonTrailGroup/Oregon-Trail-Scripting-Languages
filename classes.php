@@ -203,6 +203,7 @@
 		public $_health = "Good";	#general health of the party
 		public $_supplies;	#supplies class instant
 		public $_livingMembers = 5; #licing members of the party
+		public $_leader;
 		public $_rate = 3; #rate at which food is eaten
 		public $_job;
 		public $_jobVal = [["empty",0],["Banker", 1600.00], 
@@ -217,6 +218,7 @@
 			$this->_members[3] = new PartyMember($names[3]);
 			$this->_members[4] = new PartyMember($names[4]);
 
+			$this->_leader = $names[0];
 			#supplies made by passing in starting money
 			$this->_job = $job;
 
@@ -255,21 +257,35 @@
 		#checks if any members can be killed (has 0 health)
 		public function killCheck()
 		{
+			$checkLeader = false;
 			foreach($this->_members as $body)
 			{
 				if($body->_alive)
 				{
 					if($body->_health <= 0)
 					{
+						$checkLeader = true;
 						$body->_alive = false;
 						$this->_livingMembers-=1;
+
 					}
+				}
+			}
+			if ($checkLeader)
+			{
+				foreach($this->_members as $body)
+			{
+				if($body->_alive)
+				{
+					$this->_leader = $body->_name;
+					break;
 				}
 			}
 
 			#code for when all members are dead
 			#ends game
 		}
+	}
 
 		#averages health and assigns a rating
 		public function health()
