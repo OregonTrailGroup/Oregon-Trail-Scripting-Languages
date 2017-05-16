@@ -9,13 +9,20 @@
  */
 include "classes.php";
 session_start();
-include 'setvars.php';
 include "commonUI.php";
 
 $journey = $_SESSION["playerJourney"];
 $location = $journey->getLandmark($journey->_distance);
-$shop = new Shop($location[1]->_shopIndex);
-$shopTitle = $location[1]->_name." - Shop";
+if (!$location)
+{
+    $shop = new Shop(1);
+    $shopTitle = "Independence, Missouri - Shop";
+}
+else
+{
+    $shop = new Shop($location[1]->_shopIndex);
+    $shopTitle = $location[1]->_name." - Shop";
+}
 $moneyFormat = "%!n";
 startHTML($shopTitle);
 ?>

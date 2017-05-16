@@ -12,8 +12,8 @@ startHTML("inbetween");
 
 $leader = $_SESSION["playParty"]->_leader;
 $location = $_SESSION["playerJourney"]->_distance;
-$message = $_GET["$message"];
-$month = $_SESSION["playerJourney"]->_month;
+$message = $_GET["message"];
+$month = array_search($_SESSION["playerJourney"]->_month, $_SESSION["playerJourney"]->_months) + 1;
 $day = $_SESSION["playerJourney"]->_date;
 
 

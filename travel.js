@@ -167,6 +167,8 @@ $(document).ready(function() {
             else {
                 startGameLoop(gameLoopIteration);
                 $("button#showActions").text("Examine Your Surroundings");
+                $("#rest_div").hide();
+                $("#supply_div").hide();
             }
         }
     });

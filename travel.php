@@ -63,7 +63,7 @@
 <!-- Allows user to advance to next landmark -->
 <div id="nextLandmark" style="display: none;">
     <p>You reached the next landmark.</p>
-    <a href="Landmark.php"><button>Go to Landmark</button></a>
+    <a href="landmark.php"><button>Go to Landmark</button></a>
 </div>
 
 <script>

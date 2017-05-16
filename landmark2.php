@@ -7,7 +7,6 @@ include "commonUI.php";
 startHTML("landmark");
 
 $local = $_SESSION["playerJourney"]->getLandmark($_SESSION["playerJourney"]->_distance)[1];
-$name =  $_GET["$name"];
 $name =  $local->_name;
 
 $hasShop = $local->_hasShop;
@@ -23,6 +22,9 @@ $hasShop = $local->_hasShop;
 
 if($isRiver)
 {
+	?>
+	<h4>The river is <?php echo $local->_depth; ?> feet deep.</h4>
+	<?php
 	showRiverActions($local->_hasFerry, basename(__FILE__));
 	if(isset($_GET["fording"]) || isset($_GET["caulking"]))
 	{

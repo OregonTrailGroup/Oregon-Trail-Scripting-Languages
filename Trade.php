@@ -52,7 +52,7 @@ else
         <input type = "submit" value="Yes">  
 	</form>
 
-	   <a href = "<?php echo $_GET["sourcePage.php"]?>"> <button>No</button></a>
+	   <a href = "<?php echo $_GET["sourcePage"]?>"> <button>No</button></a>
 
 
 </p>
