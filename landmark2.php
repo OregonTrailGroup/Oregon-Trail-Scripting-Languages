@@ -24,9 +24,17 @@ $hasShop = $local->_hasShop;
 if($isRiver)
 {
 	showRiverActions($local->_hasFerry);
-	if(isset($_GET["fording"]))
+	if(isset($_GET["fording"]) || isset($_GET["caulking"]))
 	{
-		$chance = $local->ford();
+		if (isset($_GET["fording"]))
+		{
+			$chance = $local->ford();
+		}
+		if (isset($_GET["caulking"]))
+		{
+			$chance = rand(0,1) - 1;
+		}
+
 		if($chance<0)
 		{
         	$lostItem = rand(0, 7);
