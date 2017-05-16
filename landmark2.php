@@ -23,7 +23,7 @@ $hasShop = $local->_hasShop;
 
 if($isRiver)
 {
-	showRiverActions($local->_hasFerry);
+	showRiverActions($local->_hasFerry, basename(__FILE__));
 	if(isset($_GET["fording"]) || isset($_GET["caulking"]))
 	{
 		if (isset($_GET["fording"]))
@@ -64,7 +64,7 @@ if($isRiver)
 }
 
 else{
-	showActions($hasShop, false);
+	showActions($hasShop, false, basename(__FILE__));
 	?><a href="travel.php"><button>Back To Travel</button></a>
 	<?php
 
