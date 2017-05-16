@@ -78,7 +78,7 @@ $(document).ready(function(){
 		$(ele).toggle();
 
 		if (currentPTag >= 3) {
-			$("#btn_info_continue").toggle();
+			$("#btn_hiscores_continue").toggle();
 			$("#btn_info_return").toggle();
 		}
 	});

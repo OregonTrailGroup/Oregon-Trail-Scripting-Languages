@@ -9,8 +9,6 @@ $scores = [];
 if ($db->connect()) {
     $scores = $db->getScores();
 }
-
-
 ?>
     <div id="div_hiscores" class="vertical-layout">
         <br><img src="assets/Separator2.png"><br>
@@ -66,27 +64,18 @@ if ($db->connect()) {
         <p id="p_info2">
             The resources you arrive with will help you get started in the new land. You receive points for each item you bring safely to Oregon.<br>
 
-            <p class="p_inline">
-                <div id="div_txtblock" class="horizontal-layout">Health of Party</div>
-                Wagon<br>
-                Ox<br>
-                Spare wagon part<br>
-                Set of Clothing<br>
-                <!-- FIXME: BELOW NEEDS TWEAKED SINCE WE'RE NOT DOING HUNTING -->
-                Bait (each 50)<br>
-                Food (each 25lbs)<br>
-                Cash (each 5$)<br>
-            </p>
-            <p class="p_inline">
-                <div style="background-color:white;color:black;height:256px;width:256px;">Points per Person</div><br>
-                50<br>
-                4<br>
-                2<br>
-                2<br>
-                1<br>
-                1<br>
-                1<br>
-            </p>
+            <table class="vertical-layout" id="tbl_points_hidden">
+                <tr id="imgs"> <th><div id="div_txtblock" class="horizontal-layout">Resources of Party</div></th> 
+                    <th><div id="div_txtblock" class="horizontal-layout">Points per Item</div></th> </tr>
+                <tr> <td>Wagon</td> <td>50</td> </tr>
+                <tr> <td>Ox</td> <td>4</td> </tr>
+                <tr> <td>Spare wagon part</td> <td>2</td> </tr>
+                <tr> <td>Set of Clothing</td> <td>2</td> </tr>
+                <tr> <td>Bait (each 50)</td> <td>1</td> </tr>
+                <tr> <td>Food (each 25lbs)</td> <td>1</td> </tr>
+                <tr> <td>Cash (each $5)</td> <td>1</td> </tr>
+            </table>
+
         </p>
         <p id="p_info3">
             You receive points for your occupation in the new land. Because more farmers and carpenters were needed than bankers, you receive double points upon arriving in Oregon as a carpenter, and triple points for arriving as a farmer.
