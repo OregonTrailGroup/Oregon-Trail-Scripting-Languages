@@ -11,8 +11,8 @@ startHTML();
 <meta http-equiv="refresh" content="0; url= hiscores.php" />
 <?php
 
-$name = $_GET["$name"];
-$score = intval($_GET["$score"]);
+$name = $_GET["name"];
+$score = intval($_GET["score"]);
 
 $otd = new OregonTrailDatabase("eritte2","eritte2");
 $conn = $otd->connect();
