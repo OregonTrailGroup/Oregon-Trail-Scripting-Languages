@@ -25,7 +25,6 @@ function gameLoopIteration()
     // Eat
     $.get("travel-sync.php", {eat: true}, function(response) {
         $("span#foodSpan").text(response.remainingFood);
-        console.log("Remaining food: " + response.remainingFood);
     }, "json");
 
     // Do health check
@@ -44,6 +43,18 @@ function gameLoopIteration()
             }
 
             $("p#messageArea").append("The following people have died: " + dead + ". ");
+        }
+
+        // Check for no remaining living members
+
+        if (livingMembers <= 0)
+        {
+            isGameloopDisallowed = true;
+            stopGameLoop();
+            $("div#nextLandmark").hide();
+            $("#rest_div").hide();
+            $("#supply_div").hide();
+            $("div#partyDied").show();
         }
     }, "json");
 
@@ -123,15 +134,6 @@ function gameLoopIteration()
         }
     }, "json");
 
-    // Check for no remaining living members
-
-    if (livingMembers <= 0)
-    {
-        isGameloopDisallowed = true;
-        stopGameLoop();
-        $("div#nextLandmark").hide();
-        $("div#partyDied").show();
-    }
 }
 
 // Called when the user passes time via CommonActions
@@ -148,6 +150,8 @@ function timePassed(response)
         stopGameLoop();
         $("div#nextLandmark").hide();
         $("div#partyDied").show();
+        $("#rest_div").hide();
+        $("#supply_div").hide();
     }
 }
 
@@ -162,7 +166,9 @@ $(document).ready(function() {
 
             if (buttonsVisible) {
                 stopGameLoop();
+                $("#common_Buttons").show();
                 $("button#showActions").text("Return to the trail");
+                $(".button_hide").css("display", "inline");
             }
             else {
                 startGameLoop(gameLoopIteration);

@@ -13,6 +13,11 @@
 		if($initiallyHidden){
 			?>
 			<style>
+			#common_Buttons
+			{
+				display: inherit;
+			}
+			
 			.button_hide {
 				display: none;
 			}
