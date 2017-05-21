@@ -25,7 +25,6 @@ if($isRiver)
 	?>
 	<h4>The river is <?php echo $local->_depth; ?> feet deep.</h4>
 	<?php
-	showRiverActions($local->_hasFerry, basename(__FILE__));
 	if(isset($_GET["fording"]) || isset($_GET["caulking"]))
 	{
 		if (isset($_GET["fording"]))
@@ -64,6 +63,10 @@ if($isRiver)
 	<p>Took the ferry</p>
 	<a href="travel.php"><button>Back To Travel</button></a>
 	<?php
+	}
+	else
+	{
+		showRiverActions($local->_hasFerry, basename(__FILE__));
 	}
 }
 
