@@ -315,7 +315,14 @@
 				}
 			}
 
-			$average = $sum / $this->_livingMembers;
+			if ($this->_livingMembers != 0)
+			{
+				$average = $sum / $this->_livingMembers;
+			}
+			else
+			{
+				$average = 0;
+			}
 
 
 			if($average <= 0)

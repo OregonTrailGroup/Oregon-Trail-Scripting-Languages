@@ -83,7 +83,7 @@ startHTML("The Last River");
 
 <div id="playerWon" style="display: none;">
     <p>You made it!</p>
-    <a href="end.php?=0"><button>Go to Oregon City</button></a>
+    <a href="end.php?toll=0"><button>Go to Oregon City</button></a>
 </div>
 
 <div id="playerDied" style="display: none;">

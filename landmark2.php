@@ -25,7 +25,6 @@ if($isRiver)
 	?>
 	<h4>The river is <?php echo $local->_depth; ?> feet deep.</h4>
 	<?php
-	showRiverActions($local->_hasFerry, basename(__FILE__));
 	if(isset($_GET["fording"]) || isset($_GET["caulking"]))
 	{
 		if (isset($_GET["fording"]))
@@ -40,10 +39,12 @@ if($isRiver)
 		if($chance<0)
 		{
         	$lostItem = rand(0, 7);
+			$itemNames = array("pounds of food", "dollars", "tubs of bait", "pairs of clothes",
+				"wagon wheels", "wagon axles", "wagon tongues", "yoke of oxen");
         	$maxLost = array(50, 50, 30, 4, 1, 1, 1, 1);
-        	$amountLost = rand(1, $amountLost[$lostItem]);
+        	$amountLost = rand(1, $maxLost[$lostItem]);
         	$_SESSION["playParty"]->_supplies->setItem($lostItem, -$amountLost);
-        	$str =  "Lost " . $amountLost . " " . $lostItem;
+        	$str =  "Lost " . $amountLost . " " . $itemNames[$lostItem];
         	
 		}
 		else{
@@ -62,6 +63,10 @@ if($isRiver)
 	<p>Took the ferry</p>
 	<a href="travel.php"><button>Back To Travel</button></a>
 	<?php
+	}
+	else
+	{
+		showRiverActions($local->_hasFerry, basename(__FILE__));
 	}
 }
 

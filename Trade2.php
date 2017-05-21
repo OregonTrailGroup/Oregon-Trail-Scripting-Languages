@@ -18,8 +18,8 @@ startHTML();
 
 <?php
 
-$_SESSION["playParty"]->_supplies->setItem($_GET["$itemID"], -intval($_GET["$itemQunt"]));
-$_SESSION["playParty"]->_supplies->setItem(intval($_GET["$rewardID"]), intval($_GET["$rewardQunt"]));
+$_SESSION["playParty"]->_supplies->setItem($_GET["itemID"], -intval($_GET["itemQunt"]));
+$_SESSION["playParty"]->_supplies->setItem(intval($_GET["rewardID"]), intval($_GET["rewardQunt"]));
 	
 
 endHTML();

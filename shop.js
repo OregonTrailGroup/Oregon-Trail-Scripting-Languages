@@ -36,7 +36,7 @@ $(document).ready(function () {
     });
 
     $("button#food").click(function() {
-        if (food[1] <= money)
+        if (food[1] * 10 <= money)
         {
             food[0] += 10;
             money -= food[1] * 10;
