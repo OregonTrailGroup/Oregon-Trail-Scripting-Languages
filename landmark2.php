@@ -40,10 +40,12 @@ if($isRiver)
 		if($chance<0)
 		{
         	$lostItem = rand(0, 7);
+			$itemNames = array("pounds of food", "dollars", "tubs of bait", "pairs of clothes",
+				"wagon wheels", "wagon axles", "wagon tongues", "yoke of oxen");
         	$maxLost = array(50, 50, 30, 4, 1, 1, 1, 1);
-        	$amountLost = rand(1, $amountLost[$lostItem]);
+        	$amountLost = rand(1, $maxLost[$lostItem]);
         	$_SESSION["playParty"]->_supplies->setItem($lostItem, -$amountLost);
-        	$str =  "Lost " . $amountLost . " " . $lostItem;
+        	$str =  "Lost " . $amountLost . " " . $itemNames[$lostItem];
         	
 		}
 		else{
